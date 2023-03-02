@@ -1,0 +1,56 @@
+package main.java.com.ubo.tp.twitub.ihm.signin;
+
+import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
+import main.java.com.ubo.tp.twitub.datamodel.User;
+import main.java.com.ubo.tp.twitub.ihm.IPage;
+import main.java.com.ubo.tp.twitub.observers.IAccountObserver;
+import main.java.com.ubo.tp.twitub.observers.ISignInObserver;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SignInPageController implements IPage.IController, ISignInObserver {
+
+    private final SignInPageView signInPageView;
+    private final IDatabase database;
+    private final List<IAccountObserver> accountObservers;
+    private User user;
+
+    public SignInPageController(IDatabase database) {
+        signInPageView = new SignInPageView();
+        accountObservers = new ArrayList<>();
+        this.database = database;
+    }
+
+    @Override
+    public void init() {
+        signInPageView.addSignInObserver(this);
+        signInPageView.initUIComponents();
+    }
+
+    @Override
+    public Component show() {
+        return signInPageView.show();
+    }
+
+    @Override
+    public void doLogin(String identifiant, String password) {
+        database.getUsers().forEach(user -> {
+            if (user.getName().equalsIgnoreCase(identifiant) && user.getUserPassword().equals(password)) {
+                this.user = user;
+            }
+        });
+        accountObservers.forEach(ob -> ob.notifyUserConnection(user));
+    }
+
+    @Override
+    public void doRegister() {
+        accountObservers.forEach(IAccountObserver::notifyUserInscription);
+    }
+
+    @Override
+    public void addObserver(IAccountObserver observer) {
+        this.accountObservers.add(observer);
+    }
+}
