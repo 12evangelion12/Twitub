@@ -1,9 +1,9 @@
 package main.java.com.ubo.tp.twitub.ihm.twit;
 
 import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observers.ISignOutObserver;
-import main.java.com.ubo.tp.twitub.observers.ITwitSendObserver;
-import main.java.com.ubo.tp.twitub.observers.ITwitStateObserver;
+import main.java.com.ubo.tp.twitub.observer.ISignOutObserver;
+import main.java.com.ubo.tp.twitub.observer.ITwitSendObserver;
+import main.java.com.ubo.tp.twitub.observer.ITwitStateObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,22 +34,22 @@ public class TwitPageView implements IPage.IView, ITwitStateObserver {
         jPanel.setLayout(new GridBagLayout());
 
         disconnectionButton = new JButton("Deconnexion");
-        GridBagConstraints disconnectionButtonConstraints = new GridBagConstraints( 0, 3, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0,10,10,0), 0, 0);
+        GridBagConstraints disconnectionButtonConstraints = new GridBagConstraints(0, 3, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 10, 0), 0, 0);
         initDisconnectionButtonEvent();
 
         twitSendButton = new JButton("Envoyer le twit");
-        GridBagConstraints twitSendConstraints = new GridBagConstraints( 2, 3, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,10,10), 0, 0);
+        GridBagConstraints twitSendConstraints = new GridBagConstraints(2, 3, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 10, 10), 0, 0);
         initTwitButtonEvent();
 
         twitTextField = new JTextField();
-        GridBagConstraints twitTextFieldConstraints = new GridBagConstraints( 0, 1, 3, 1, 1, 1, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH, new Insets(0,10,0,0), 0, 0);
+        GridBagConstraints twitTextFieldConstraints = new GridBagConstraints(0, 1, 3, 1, 1, 1, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH, new Insets(0, 10, 0, 0), 0, 0);
 
         JLabel twitSenderLabel = new JLabel();
-        GridBagConstraints twitSenderLabelConstraints = new GridBagConstraints( 0, 0, 3, 1, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL, new Insets(0,10,10,0), 0, 0);
-        twitSenderLabel.setText("Utilisateur : "+username);
+        GridBagConstraints twitSenderLabelConstraints = new GridBagConstraints(0, 0, 3, 1, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 10, 0), 0, 0);
+        twitSenderLabel.setText("Utilisateur : " + username);
 
         twitStateLabel = new JLabel();
-        GridBagConstraints twitStateLabelConstraints = new GridBagConstraints( 0, 2, 3, 1, 1, 0, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(0,10,10,0), 0, 0);
+        GridBagConstraints twitStateLabelConstraints = new GridBagConstraints(0, 2, 3, 1, 1, 0, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 10, 0), 0, 0);
 
 
         jPanel.add(disconnectionButton, disconnectionButtonConstraints);
@@ -82,7 +82,7 @@ public class TwitPageView implements IPage.IView, ITwitStateObserver {
 
     @Override
     public void twitTooLong() {
-        twitStateLabel.setText("Le twit est trop long ! ("+twitTextField.getText().length()+">250)  <(｀^´)>");
+        twitStateLabel.setText("Le twit est trop long ! (" + twitTextField.getText().length() + ">250)  <(｀^´)>");
     }
 
     @Override

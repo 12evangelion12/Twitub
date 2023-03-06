@@ -1,12 +1,13 @@
 package main.java.com.ubo.tp.twitub.ihm.signup;
 
 import main.java.com.ubo.tp.twitub.common.ResourceManager;
+import main.java.com.ubo.tp.twitub.core.EntityManager;
 import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observers.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observers.ISignUpObserver;
-import main.java.com.ubo.tp.twitub.observers.ISignUpStateObserver;
+import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
+import main.java.com.ubo.tp.twitub.observer.ISignUpObserver;
+import main.java.com.ubo.tp.twitub.observer.ISignUpStateObserver;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,12 +18,14 @@ import java.util.UUID;
 public class SignUpPageController implements IPage.IController, ISignUpObserver {
 
     private final IDatabase database;
+    private final EntityManager entityManager;
     private final SignUpPageView signUpPageView;
     private final List<IAccountObserver> accountObservers;
     private final List<ISignUpStateObserver> signUpStateObservers;
 
-    public SignUpPageController(IDatabase database) {
+    public SignUpPageController(IDatabase database, EntityManager entityManager) {
         this.database = database;
+        this.entityManager = entityManager;
         signUpPageView = new SignUpPageView();
         accountObservers = new ArrayList<>();
         signUpStateObservers = new ArrayList<>();
@@ -53,8 +56,16 @@ public class SignUpPageController implements IPage.IController, ISignUpObserver 
             return;
         }
 
+        for (User user : database.getUsers()) {
+            if (user.getUserTag().equalsIgnoreCase(pseudo)) {
+                signUpStateObservers.forEach(iSignUpStateObserver -> iSignUpStateObserver.usertagAlreadyExist(pseudo));
+                return;
+            }
+        }
+
         User user = new User(UUID.randomUUID(), pseudo, password, username, new HashSet<>(), ResourceManager.getResource("images/userProfil.png").getPath());
-        database.addUser(user);
+        entityManager.sendUser(user);
+        signUpStateObservers.forEach(iSignUpStateObserver -> iSignUpStateObserver.registerSuccess(user));
     }
 
     @Override

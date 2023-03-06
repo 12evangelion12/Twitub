@@ -4,10 +4,10 @@ import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
 import main.java.com.ubo.tp.twitub.datamodel.Twit;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observers.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observers.ISignOutObserver;
-import main.java.com.ubo.tp.twitub.observers.ITwitSendObserver;
-import main.java.com.ubo.tp.twitub.observers.ITwitStateObserver;
+import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
+import main.java.com.ubo.tp.twitub.observer.ISignOutObserver;
+import main.java.com.ubo.tp.twitub.observer.ITwitSendObserver;
+import main.java.com.ubo.tp.twitub.observer.ITwitStateObserver;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class TwitPageController implements IPage.IController, ISignOutObserver, 
     @Override
     public void sendTwit(String twitString) {
 
-        if(twitString.length() > 250) {
+        if (twitString.length() > 250) {
             twitStateObservers.forEach(ITwitStateObserver::twitTooLong);
             return;
         }

@@ -1,6 +1,6 @@
 package main.java.com.ubo.tp.twitub.ihm;
 
-import main.java.com.ubo.tp.twitub.observers.IMenuBarObserver;
+import main.java.com.ubo.tp.twitub.observer.IMenuBarObserver;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -81,7 +81,7 @@ public class StructurePageView implements IPage.IView {
         //Création d'un sous menu dossier partage pour le menu "Fichier"
         try {
             ImageIcon partagedFolderIcon = new ImageIcon(ImageIO.read(new File("src/main/resources/images/partagedFolder.png")));
-            Image scaleImage = partagedFolderIcon.getImage().getScaledInstance(20, 20,Image.SCALE_DEFAULT);
+            Image scaleImage = partagedFolderIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
             partagedFolderMenu = new JMenuItem("Dossier partagé", new ImageIcon(scaleImage));
             initFolderButtonListener();
             files.add(partagedFolderMenu);

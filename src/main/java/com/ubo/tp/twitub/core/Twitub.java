@@ -5,11 +5,9 @@ import main.java.com.ubo.tp.twitub.common.PropertiesManager;
 import main.java.com.ubo.tp.twitub.common.SharedDirectoryManager;
 import main.java.com.ubo.tp.twitub.datamodel.Database;
 import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.events.file.IWatchableDirectory;
 import main.java.com.ubo.tp.twitub.ihm.StructurePageController;
-import main.java.com.ubo.tp.twitub.ihm.StructurePageView;
 import main.java.com.ubo.tp.twitub.ihm.TwitubMock;
-import main.java.com.ubo.tp.twitub.observers.DataBaseObserverImpl;
+import main.java.com.ubo.tp.twitub.observer.DataBaseObserverImpl;
 
 import javax.swing.*;
 
@@ -29,20 +27,6 @@ public class Twitub {
      */
     protected EntityManager mEntityManager;
 
-    /**
-     * Vue principale de l'application.
-     */
-    protected StructurePageView mMainView;
-
-    /**
-     * Classe de surveillance de répertoire
-     */
-    protected IWatchableDirectory mWatchableDirectory;
-
-    /**
-     * Répertoire d'échange de l'application.
-     */
-    protected String mExchangeDirectoryPath;
 
     /**
      * Nom de la classe de l'UI.
@@ -53,6 +37,7 @@ public class Twitub {
      * Constructeur.
      */
     public Twitub() {
+
         // Init du look and feel de l'application
         this.initLookAndFeel();
 
@@ -69,7 +54,7 @@ public class Twitub {
         this.initGui();
 
         // Initialisation du répertoire d'échange
-        new SharedDirectoryManager(mDatabase).initDirectory();
+        new SharedDirectoryManager(mDatabase, mEntityManager).initDirectory();
     }
 
     /**
@@ -79,7 +64,7 @@ public class Twitub {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException e) {
+                UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
     }
@@ -106,6 +91,7 @@ public class Twitub {
     protected void initDatabase() {
         mDatabase = new Database();
         mDatabase.addObserver(new DataBaseObserverImpl());
+        this.mEntityManager = new EntityManager(mDatabase);
     }
 
     public void show() {

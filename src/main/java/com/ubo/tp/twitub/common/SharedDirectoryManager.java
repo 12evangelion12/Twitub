@@ -29,8 +29,8 @@ public class SharedDirectoryManager {
 
     protected Properties properties;
 
-    public SharedDirectoryManager(IDatabase database) {
-        mEntityManager = new EntityManager(database);
+    public SharedDirectoryManager(IDatabase database, EntityManager entityManager) {
+        mEntityManager = entityManager;
         properties = PropertiesManager.loadProperties(Constants.CONFIGURATION_FILE);
     }
 
@@ -45,7 +45,9 @@ public class SharedDirectoryManager {
         String directoryPath = properties.getProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY);
         if (directoryPath == null || directoryPath.isEmpty()) {
             openFileChooser();
+            return;
         }
+        initDirectory(directoryPath);
     }
 
     public void openFileChooser() {

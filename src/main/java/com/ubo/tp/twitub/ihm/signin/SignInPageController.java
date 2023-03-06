@@ -1,10 +1,11 @@
 package main.java.com.ubo.tp.twitub.ihm.signin;
 
+import main.java.com.ubo.tp.twitub.core.EntityManager;
 import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observers.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observers.ISignInObserver;
+import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
+import main.java.com.ubo.tp.twitub.observer.ISignInObserver;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,10 +15,12 @@ public class SignInPageController implements IPage.IController, ISignInObserver 
 
     private final SignInPageView signInPageView;
     private final IDatabase database;
+    private final EntityManager entityManager;
     private final List<IAccountObserver> accountObservers;
     private User user;
 
-    public SignInPageController(IDatabase database) {
+    public SignInPageController(IDatabase database, EntityManager entityManager) {
+        this.entityManager = entityManager;
         signInPageView = new SignInPageView();
         accountObservers = new ArrayList<>();
         this.database = database;
@@ -36,6 +39,7 @@ public class SignInPageController implements IPage.IController, ISignInObserver 
 
     @Override
     public void doLogin(String identifiant, String password) {
+
         database.getUsers().forEach(user -> {
             if (user.getName().equalsIgnoreCase(identifiant) && user.getUserPassword().equals(password)) {
                 this.user = user;

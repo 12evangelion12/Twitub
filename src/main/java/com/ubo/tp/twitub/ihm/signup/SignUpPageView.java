@@ -1,8 +1,9 @@
 package main.java.com.ubo.tp.twitub.ihm.signup;
 
+import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observers.ISignUpObserver;
-import main.java.com.ubo.tp.twitub.observers.ISignUpStateObserver;
+import main.java.com.ubo.tp.twitub.observer.ISignUpObserver;
+import main.java.com.ubo.tp.twitub.observer.ISignUpStateObserver;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -98,5 +99,15 @@ public class SignUpPageView implements IPage.IView, ISignUpStateObserver {
     @Override
     public void fieldNotSpecified() {
         JOptionPane.showMessageDialog(jPanel, "Merci de spécifier tous les champs disponibles !", "Champs manquants", JOptionPane.WARNING_MESSAGE);
+    }
+
+    @Override
+    public void usertagAlreadyExist(String usertag) {
+        JOptionPane.showMessageDialog(jPanel, "Le pseudonyme '" + usertag + "' existe déjà !", "Pseudonyme déjà utilisé", JOptionPane.WARNING_MESSAGE);
+    }
+
+    @Override
+    public void registerSuccess(User user) {
+        JOptionPane.showMessageDialog(jPanel, "Le compte '" + user.getName() + "' avec le tag '" + user.getUserTag() + "' a été créé avec succès", "Inscription validée", JOptionPane.INFORMATION_MESSAGE);
     }
 }
