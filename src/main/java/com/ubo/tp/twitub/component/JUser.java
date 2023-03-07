@@ -1,5 +1,6 @@
-package main.java.com.ubo.tp.twitub.components;
+package main.java.com.ubo.tp.twitub.component;
 
+import main.java.com.ubo.tp.twitub.common.Constants;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 
 import javax.imageio.ImageIO;
@@ -29,12 +30,21 @@ public class JUser implements JComponent {
         jPanel.setLayout(new GridBagLayout());
 
         JLabel userProfil = new JLabel();
+        ImageIcon icon = null;
         try {
-            ImageIcon icon = new ImageIcon(ImageIO.read(new File(user.getAvatarPath())));
+            icon = new ImageIcon(ImageIO.read(new File(user.getAvatarPath())));
+        } catch (IOException e) {
+            System.out.println("Impossible de charger l'icone de l'utilisateur, chargement de l'icone par défaut en cours...");
+            try {
+                icon = new ImageIcon(ImageIO.read(new File(Constants.DEFAULT_USER_ICON_PATH)));
+                System.out.println("Chargement de l'icone par défaut réussi !");
+            } catch (IOException ex) {
+                System.out.println("Impossible de charger l'icone par défaut");
+            }
+        }
+        if (icon != null) {
             Image scaleImage = icon.getImage().getScaledInstance(64, 64, Image.SCALE_DEFAULT);
             userProfil.setIcon(new ImageIcon(scaleImage));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         GridBagConstraints userProfilContraint = new GridBagConstraints(0, 0, 1, 2, 1, 1, GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0);
 

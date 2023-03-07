@@ -1,8 +1,8 @@
 package main.java.com.ubo.tp.twitub.ihm;
 
 import main.java.com.ubo.tp.twitub.common.SharedDirectoryManager;
-import main.java.com.ubo.tp.twitub.components.JNavBarComponent;
-import main.java.com.ubo.tp.twitub.components.JSignoutConponent;
+import main.java.com.ubo.tp.twitub.component.JNavBarComponent;
+import main.java.com.ubo.tp.twitub.component.JSignoutConponent;
 import main.java.com.ubo.tp.twitub.core.EntityManager;
 import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
 import main.java.com.ubo.tp.twitub.datamodel.User;
@@ -48,7 +48,7 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
         }
 
         connectedUser = user;
-        TwitPageController twitPageController = new TwitPageController(mDatabase, user);
+        TwitPageController twitPageController = new TwitPageController(user, mDatabase, mEntityManager);
         twitPageController.init();
         twitPageController.addObserver(this);
         changeView(twitPageController.show(), true);

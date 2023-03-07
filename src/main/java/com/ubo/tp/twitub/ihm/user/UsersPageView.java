@@ -1,7 +1,7 @@
 package main.java.com.ubo.tp.twitub.ihm.user;
 
-import main.java.com.ubo.tp.twitub.components.JUserList;
-import main.java.com.ubo.tp.twitub.components.JUserSearch;
+import main.java.com.ubo.tp.twitub.component.JUserList;
+import main.java.com.ubo.tp.twitub.component.JUserSearch;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
 import main.java.com.ubo.tp.twitub.observer.ISearchItemObserver;

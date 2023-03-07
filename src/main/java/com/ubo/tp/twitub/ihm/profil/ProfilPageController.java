@@ -2,6 +2,7 @@ package main.java.com.ubo.tp.twitub.ihm.profil;
 
 import main.java.com.ubo.tp.twitub.core.EntityManager;
 import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
+import main.java.com.ubo.tp.twitub.datamodel.IDatabaseObserver;
 import main.java.com.ubo.tp.twitub.datamodel.Twit;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ProfilPageController implements IPage.IController, IUserProfilChangeObserver, IUserFollowObserver {
+public class ProfilPageController implements IPage.IController, IUserProfilChangeObserver, IUserFollowObserver, IDatabaseObserver {
 
     private final List<IAccountObserver> accountObserverList;
     private final ProfilPageView profilPageView;
@@ -42,7 +43,6 @@ public class ProfilPageController implements IPage.IController, IUserProfilChang
         userProfil.setUser(session);
         userProfil.setTwitCount(userTwitCount);
         userProfil.addObserver(this);
-
         return userProfil;
     }
 
@@ -53,6 +53,7 @@ public class ProfilPageController implements IPage.IController, IUserProfilChang
     @Override
     public void init() {
         profilPageView.initUIComponents();
+        database.addObserver(this);
     }
 
     @Override
@@ -82,5 +83,23 @@ public class ProfilPageController implements IPage.IController, IUserProfilChang
         session.removeFollowing(userUnfollowed.getUserTag());
         entityManager.sendUser(session);
         profilPageView.updateListFollowers(getUserFollowers());
+    }
+
+    @Override
+    public void notifyTwitAdded(Twit addedTwit) {
+        if (profilPageView != null && addedTwit.getTwiter().getUserTag().equalsIgnoreCase(session.getUserTag())) {
+            Set<Twit> twits = database.getTwits();
+            int userTwitCount = (int) twits.stream().filter(twit -> twit.getTwiter().getUserTag().equalsIgnoreCase(session.getUserTag())).count();
+            profilPageView.updateUserTwitCount(userTwitCount);
+        }
+    }
+
+    @Override
+    public void notifyTwitDeleted(Twit deletedTwit) {
+        if (profilPageView != null && deletedTwit.getTwiter().getUserTag().equalsIgnoreCase(session.getUserTag())) {
+            Set<Twit> twits = database.getTwits();
+            int userTwitCount = (int) twits.stream().filter(twit -> twit.getTwiter().getUserTag().equalsIgnoreCase(session.getUserTag())).count();
+            profilPageView.updateUserTwitCount(userTwitCount);
+        }
     }
 }

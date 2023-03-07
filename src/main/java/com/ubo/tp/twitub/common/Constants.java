@@ -53,6 +53,8 @@ public interface Constants {
      */
     public static final String CONFIGURATION_FILE = "src/main/resources/configuration.properties";
 
+    public static final String DEFAULT_USER_ICON_PATH = "src/main/resources/images/userProfil.png";
+
     /**
      * Clé de configuration pour la sauvegarde du répertoire d'échange.
      */

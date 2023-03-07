@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.components;
+package main.java.com.ubo.tp.twitub.component;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

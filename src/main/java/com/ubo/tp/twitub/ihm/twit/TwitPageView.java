@@ -1,30 +1,35 @@
 package main.java.com.ubo.tp.twitub.ihm.twit;
 
+import main.java.com.ubo.tp.twitub.component.JTwitList;
+import main.java.com.ubo.tp.twitub.component.JTwitSend;
+import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observer.ISignOutObserver;
-import main.java.com.ubo.tp.twitub.observer.ITwitSendObserver;
-import main.java.com.ubo.tp.twitub.observer.ITwitStateObserver;
+import main.java.com.ubo.tp.twitub.model.TwitListModel;
+import main.java.com.ubo.tp.twitub.newObserver.ITwitControllerObserver;
+import main.java.com.ubo.tp.twitub.newObserver.ITwitSendComponentObserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TwitPageView implements IPage.IView, ITwitStateObserver {
+public class TwitPageView implements IPage.IView {
 
     private JPanel jPanel;
-    private final List<ISignOutObserver> logoutObservers;
-    private final List<ITwitSendObserver> twitSendObservers;
-    private JButton disconnectionButton;
-    private JButton twitSendButton;
-    private JTextField twitTextField;
-    private JLabel twitStateLabel;
-    private final String username;
+    private JTwitList jTwitList;
+    private JTwitSend jTwitSend;
+    private final TwitListModel twits;
+    private final User session;
+    private final List<ITwitSendComponentObserver> twitSendComponentObserverList;
+    private final List<ITwitControllerObserver> twitControllerObservers;
 
-    public TwitPageView(String username) {
-        this.username = username;
-        logoutObservers = new ArrayList<>();
-        twitSendObservers = new ArrayList<>();
+    public TwitPageView(User session, TwitListModel twits) {
+        twitControllerObservers = new ArrayList<>();
+        twitSendComponentObserverList = new ArrayList<>();
+        this.session = session;
+        this.twits = twits;
     }
 
     @Override
@@ -33,30 +38,18 @@ public class TwitPageView implements IPage.IView, ITwitStateObserver {
         jPanel = new JPanel();
         jPanel.setLayout(new GridBagLayout());
 
-        disconnectionButton = new JButton("Deconnexion");
-        GridBagConstraints disconnectionButtonConstraints = new GridBagConstraints(0, 3, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 10, 0), 0, 0);
-        initDisconnectionButtonEvent();
+        jTwitSend = new JTwitSend(session);
+        jTwitSend.initGUI();
+        twitSendComponentObserverList.add(jTwitSend);
+        GridBagConstraints jTwitSendContraint = new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(20, 0, 0, 20), 0, 0);
+        initSendTwitButton();
 
-        twitSendButton = new JButton("Envoyer le twit");
-        GridBagConstraints twitSendConstraints = new GridBagConstraints(2, 3, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 10, 10), 0, 0);
-        initTwitButtonEvent();
+        jTwitList = new JTwitList(twits);
+        jTwitList.initGUI();
+        GridBagConstraints jTwitListContraint = new GridBagConstraints(0, 1, 1, 1, 1, 50, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(20, 0, 20, 20), 0, 0);
 
-        twitTextField = new JTextField();
-        GridBagConstraints twitTextFieldConstraints = new GridBagConstraints(0, 1, 3, 1, 1, 1, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH, new Insets(0, 10, 0, 0), 0, 0);
-
-        JLabel twitSenderLabel = new JLabel();
-        GridBagConstraints twitSenderLabelConstraints = new GridBagConstraints(0, 0, 3, 1, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 10, 0), 0, 0);
-        twitSenderLabel.setText("Utilisateur : " + username);
-
-        twitStateLabel = new JLabel();
-        GridBagConstraints twitStateLabelConstraints = new GridBagConstraints(0, 2, 3, 1, 1, 0, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 10, 0), 0, 0);
-
-
-        jPanel.add(disconnectionButton, disconnectionButtonConstraints);
-        jPanel.add(twitSendButton, twitSendConstraints);
-        jPanel.add(twitTextField, twitTextFieldConstraints);
-        jPanel.add(twitSenderLabel, twitSenderLabelConstraints);
-        jPanel.add(twitStateLabel, twitStateLabelConstraints);
+        jPanel.add(jTwitSend.getComponent(), jTwitSendContraint);
+        jPanel.add(jTwitList.getComponent(), jTwitListContraint);
     }
 
     @Override
@@ -64,18 +57,35 @@ public class TwitPageView implements IPage.IView, ITwitStateObserver {
         return jPanel;
     }
 
-    private void initDisconnectionButtonEvent() {
-        disconnectionButton.addActionListener(action -> logoutObservers.forEach(ISignOutObserver::doLogout));
+    private void initSendTwitButton() {
+
+        jTwitSend.initTwitButtonEvent(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                String twitMessage = jTwitSend.getTwitMessage();
+
+                if (twitMessage.length() == 0) {
+                    twitSendComponentObserverList.forEach(ITwitSendComponentObserver::notifyTwitIsEmpty);
+                    return;
+                }
+
+                if (twitMessage.length() > 250) {
+                    twitSendComponentObserverList.forEach(ITwitSendComponentObserver::notifyTwitIsTooLong);
+                    return;
+                }
+
+                twitControllerObservers.forEach(iTwitControllerObserver -> iTwitControllerObserver.sendTwit(session, twitMessage));
+            }
+        });
     }
 
-    public void addLogoutObserver(ISignOutObserver observer) {
-        logoutObservers.add(observer);
+    public void addController(ITwitControllerObserver observer) {
+        twitControllerObservers.add(observer);
     }
 
-    public void addTwitObserver(ITwitSendObserver observer) {
-        twitSendObservers.add(observer);
-    }
-
+    /*
     private void initTwitButtonEvent() {
         twitSendButton.addActionListener(action -> twitSendObservers.forEach(observer -> observer.sendTwit(twitTextField.getText())));
     }
@@ -89,5 +99,5 @@ public class TwitPageView implements IPage.IView, ITwitStateObserver {
     public void twitAccepted() {
         twitStateLabel.setText("Le twit à été envoyé ! :)");
         twitTextField.setText("");
-    }
+    }*/
 }

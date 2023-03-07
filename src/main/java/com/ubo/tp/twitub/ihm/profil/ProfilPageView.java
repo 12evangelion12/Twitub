@@ -1,7 +1,7 @@
 package main.java.com.ubo.tp.twitub.ihm.profil;
 
-import main.java.com.ubo.tp.twitub.components.JUserList;
-import main.java.com.ubo.tp.twitub.components.JUserProfil;
+import main.java.com.ubo.tp.twitub.component.JUserList;
+import main.java.com.ubo.tp.twitub.component.JUserProfil;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
 import main.java.com.ubo.tp.twitub.model.UserProfil;

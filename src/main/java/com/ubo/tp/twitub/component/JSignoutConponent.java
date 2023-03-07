@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.components;
+package main.java.com.ubo.tp.twitub.component;
 
 import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
 

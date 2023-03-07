@@ -1,40 +1,39 @@
 package main.java.com.ubo.tp.twitub.ihm.twit;
 
+import main.java.com.ubo.tp.twitub.core.EntityManager;
 import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
+import main.java.com.ubo.tp.twitub.datamodel.IDatabaseObserver;
 import main.java.com.ubo.tp.twitub.datamodel.Twit;
 import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
+import main.java.com.ubo.tp.twitub.model.TwitListModel;
+import main.java.com.ubo.tp.twitub.newObserver.ITwitControllerObserver;
 import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observer.ISignOutObserver;
-import main.java.com.ubo.tp.twitub.observer.ITwitSendObserver;
-import main.java.com.ubo.tp.twitub.observer.ITwitStateObserver;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TwitPageController implements IPage.IController, ISignOutObserver, ITwitSendObserver {
+public class TwitPageController implements IPage.IController, IDatabaseObserver, ITwitControllerObserver {
 
     private final TwitPageView twitPageView;
+    private final TwitListModel twitListModel;
     private final List<IAccountObserver> accountObservers;
-    private final List<ITwitStateObserver> twitStateObservers;
-    private final IDatabase database;
-    private final User user;
+    private final EntityManager entityManager;
 
-    public TwitPageController(IDatabase database, User user) {
-        twitPageView = new TwitPageView(user.getName());
+    public TwitPageController(User user, IDatabase database, EntityManager entityManager) {
+        twitListModel = new TwitListModel();
+        twitListModel.setTwits(new ArrayList<>(database.getTwits()));
+        twitPageView = new TwitPageView(user, twitListModel);
+        twitPageView.addController(this);
         accountObservers = new ArrayList<>();
-        twitStateObservers = new ArrayList<>();
-        twitStateObservers.add(twitPageView);
-        this.database = database;
-        this.user = user;
+        database.addObserver(this);
+        this.entityManager = entityManager;
     }
 
     @Override
     public void init() {
         twitPageView.initUIComponents();
-        twitPageView.addLogoutObserver(this);
-        twitPageView.addTwitObserver(this);
     }
 
     @Override
@@ -48,20 +47,23 @@ public class TwitPageController implements IPage.IController, ISignOutObserver, 
     }
 
     @Override
-    public void doLogout() {
-        accountObservers.forEach(IAccountObserver::notifyUserDisconnection);
+    public void notifyTwitAdded(Twit addedTwit) {
+        List<Twit> twits = twitListModel.getTwits();
+        twits.add(addedTwit);
+        twitListModel.setTwits(twits);
     }
 
     @Override
-    public void sendTwit(String twitString) {
+    public void sendTwit(User user, String twitMessage) {
+        //entityManager.sendTwit();
+    }
 
-        if (twitString.length() > 250) {
+    /*if (twitString.length() > 250) {
             twitStateObservers.forEach(ITwitStateObserver::twitTooLong);
             return;
         }
 
         Twit twit = new Twit(user, twitString);
-        database.addTwit(twit);
-        twitStateObservers.forEach(ITwitStateObserver::twitAccepted);
-    }
+        entityManager.sendTwit(twit);
+        twitStateObservers.forEach(ITwitStateObserver::twitAccepted);*/
 }
