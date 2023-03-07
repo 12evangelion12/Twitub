@@ -55,7 +55,9 @@ public class TwitPageController implements IPage.IController, IDatabaseObserver,
 
     @Override
     public void sendTwit(User user, String twitMessage) {
-        //entityManager.sendTwit();
+
+        Twit twit = new Twit(user, twitMessage);
+        entityManager.sendTwit(twit);
     }
 
     /*if (twitString.length() > 250) {

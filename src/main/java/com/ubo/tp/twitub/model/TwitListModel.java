@@ -8,8 +8,8 @@ import java.util.List;
 
 public class TwitListModel {
 
-    private List<Twit> twits;
     private final List<ITwitListModelObserver> twitListModelObservers;
+    private List<Twit> twits;
 
     public TwitListModel() {
         twitListModelObservers = new ArrayList<>();

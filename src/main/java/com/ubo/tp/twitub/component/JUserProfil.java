@@ -10,8 +10,8 @@ import java.io.IOException;
 
 public class JUserProfil implements JComponent {
 
-    private JPanel jPanel;
     private final UserProfil userProfil;
+    private JPanel jPanel;
     private JLabel twitCount;
 
     public JUserProfil(UserProfil userProfil) {

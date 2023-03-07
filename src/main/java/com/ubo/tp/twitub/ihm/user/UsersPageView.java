@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 
 public class UsersPageView implements IPage.IView, ISearchItemObserver {
 
-    private JPanel jPanel;
     private final List<User> users;
-    private JUserSearch jUserSearch;
     private final User session;
-    private List<IUserFollowObserver> userFollowObserverList;
+    private final List<IUserFollowObserver> userFollowObserverList;
+    private JPanel jPanel;
+    private JUserSearch jUserSearch;
 
     public UsersPageView(List<User> users, User session) {
         this.session = session;

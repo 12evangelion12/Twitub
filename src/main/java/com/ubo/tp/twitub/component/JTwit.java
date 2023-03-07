@@ -12,8 +12,8 @@ import java.time.format.DateTimeFormatter;
 
 public class JTwit implements JComponent {
 
-    private JPanel jPanel;
     private final Twit twit;
+    private JPanel jPanel;
 
     public JTwit(Twit twit) {
         this.twit = twit;

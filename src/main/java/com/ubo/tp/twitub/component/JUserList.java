@@ -12,12 +12,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class JUserList implements JComponent {
 
-    private JScrollPane jScrollPane;
     private final List<User> userList;
+    private final User session;
+    private JScrollPane jScrollPane;
     private User selectedUser;
     private boolean followingButtonState;
     private MouseAdapter mouseAdapter;
-    private final User session;
 
     public JUserList(List<User> userList, User session) {
         this.userList = userList;

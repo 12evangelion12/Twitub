@@ -1,9 +1,7 @@
 package main.java.com.ubo.tp.twitub.ihm.signup;
 
-import main.java.com.ubo.tp.twitub.datamodel.User;
 import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observer.ISignUpObserver;
-import main.java.com.ubo.tp.twitub.observer.ISignUpStateObserver;
+import main.java.com.ubo.tp.twitub.newObserver.ISignUpControllerObserver;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,9 +9,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignUpPageView implements IPage.IView, ISignUpStateObserver {
+public class SignUpPageView implements IPage.IView, ISignUpControllerObserver {
 
-    private final List<ISignUpObserver> signUpObserverList;
+    private final List<ISignUpControllerObserver> signUpControllerObservers;
     private JButton signUpButton;
     private JButton connectionButton;
     private JTextField identifiant;
@@ -22,7 +20,7 @@ public class SignUpPageView implements IPage.IView, ISignUpStateObserver {
     private JPanel jPanel;
 
     public SignUpPageView() {
-        signUpObserverList = new ArrayList<>();
+        signUpControllerObservers = new ArrayList<>();
     }
 
     @Override
@@ -85,29 +83,33 @@ public class SignUpPageView implements IPage.IView, ISignUpStateObserver {
     }
 
     public void initSignUpButtonListener() {
-        signUpButton.addActionListener(action -> signUpObserverList.forEach(observer -> observer.doRegister(identifiant.getText(), pseudonyme.getText(), String.valueOf(password.getPassword()))));
+        signUpButton.addActionListener(action -> signUpControllerObservers.forEach(observer -> observer.register(pseudonyme.getText(), identifiant.getText(), String.valueOf(password.getPassword()))));
     }
 
     public void initCancelButtonListener() {
-        connectionButton.addActionListener(action -> signUpObserverList.forEach(ISignUpObserver::cancelRegister));
+        connectionButton.addActionListener(action -> signUpControllerObservers.forEach(ISignUpControllerObserver::cancelRegister));
     }
 
-    public void addObserver(ISignUpObserver observer) {
-        signUpObserverList.add(observer);
+    public void addControllerObserver(ISignUpControllerObserver observer) {
+        signUpControllerObservers.add(observer);
     }
 
     @Override
-    public void fieldNotSpecified() {
+    public void register(String usertag, String username, String password) {
+    }
+
+    @Override
+    public void usertagAlreadyUse() {
+        JOptionPane.showMessageDialog(jPanel, "Le pseudonyme '" + pseudonyme.getText() + "' existe déjà !", "Pseudonyme déjà utilisé", JOptionPane.WARNING_MESSAGE);
+    }
+
+    @Override
+    public void credentialNotSpecified() {
         JOptionPane.showMessageDialog(jPanel, "Merci de spécifier tous les champs disponibles !", "Champs manquants", JOptionPane.WARNING_MESSAGE);
     }
 
     @Override
-    public void usertagAlreadyExist(String usertag) {
-        JOptionPane.showMessageDialog(jPanel, "Le pseudonyme '" + usertag + "' existe déjà !", "Pseudonyme déjà utilisé", JOptionPane.WARNING_MESSAGE);
-    }
-
-    @Override
-    public void registerSuccess(User user) {
-        JOptionPane.showMessageDialog(jPanel, "Le compte '" + user.getName() + "' avec le tag '" + user.getUserTag() + "' a été créé avec succès", "Inscription validée", JOptionPane.INFORMATION_MESSAGE);
+    public void registerSuccess() {
+        JOptionPane.showMessageDialog(jPanel, "Le compte '" + identifiant.getText() + "' avec le tag @" + pseudonyme.getText() + " a été créé avec succès", "Inscription validée", JOptionPane.INFORMATION_MESSAGE);
     }
 }

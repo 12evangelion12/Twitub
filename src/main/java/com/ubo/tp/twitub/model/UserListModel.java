@@ -18,17 +18,17 @@ public class UserListModel {
         userObservers = new ArrayList<>();
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-        userObservers.forEach(IUserObserver::notifyUserChanged);
-    }
-
     public User getSession() {
         return session;
     }
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+        userObservers.forEach(IUserObserver::notifyUserChanged);
     }
 
     public void addObserver(IUserObserver observer) {

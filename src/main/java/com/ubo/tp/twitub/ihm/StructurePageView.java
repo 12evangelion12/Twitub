@@ -1,6 +1,6 @@
 package main.java.com.ubo.tp.twitub.ihm;
 
-import main.java.com.ubo.tp.twitub.observer.IMenuBarObserver;
+import main.java.com.ubo.tp.twitub.newObserver.IMenuBarObserver;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,13 +12,12 @@ import java.util.List;
 
 public class StructurePageView implements IPage.IView {
 
+    private final Dimension screenSize;
+    private final List<IMenuBarObserver> menuBarObserverList;
     protected JFrame mFrame;
     private JMenuItem closeMenu;
     private JMenuItem partagedFolderMenu;
     private JButton aboutMenu;
-    private final Dimension screenSize;
-
-    private final List<IMenuBarObserver> menuBarObserverList;
 
     public StructurePageView() {
         this.screenSize = Toolkit.getDefaultToolkit().getScreenSize();

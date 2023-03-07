@@ -17,13 +17,13 @@ import java.util.List;
 
 public class TwitPageView implements IPage.IView {
 
-    private JPanel jPanel;
-    private JTwitList jTwitList;
-    private JTwitSend jTwitSend;
     private final TwitListModel twits;
     private final User session;
     private final List<ITwitSendComponentObserver> twitSendComponentObserverList;
     private final List<ITwitControllerObserver> twitControllerObservers;
+    private JPanel jPanel;
+    private JTwitList jTwitList;
+    private JTwitSend jTwitSend;
 
     public TwitPageView(User session, TwitListModel twits) {
         twitControllerObservers = new ArrayList<>();
@@ -76,6 +76,7 @@ public class TwitPageView implements IPage.IView {
                     return;
                 }
 
+                twitSendComponentObserverList.forEach(ITwitSendComponentObserver::notifyTwitAccepted);
                 twitControllerObservers.forEach(iTwitControllerObserver -> iTwitControllerObserver.sendTwit(session, twitMessage));
             }
         });
@@ -84,20 +85,4 @@ public class TwitPageView implements IPage.IView {
     public void addController(ITwitControllerObserver observer) {
         twitControllerObservers.add(observer);
     }
-
-    /*
-    private void initTwitButtonEvent() {
-        twitSendButton.addActionListener(action -> twitSendObservers.forEach(observer -> observer.sendTwit(twitTextField.getText())));
-    }
-
-    @Override
-    public void twitTooLong() {
-        twitStateLabel.setText("Le twit est trop long ! (" + twitTextField.getText().length() + ">250)  <(｀^´)>");
-    }
-
-    @Override
-    public void twitAccepted() {
-        twitStateLabel.setText("Le twit à été envoyé ! :)");
-        twitTextField.setText("");
-    }*/
 }

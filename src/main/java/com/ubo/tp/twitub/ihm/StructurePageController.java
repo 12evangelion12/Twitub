@@ -11,8 +11,8 @@ import main.java.com.ubo.tp.twitub.ihm.signin.SignInPageController;
 import main.java.com.ubo.tp.twitub.ihm.signup.SignUpPageController;
 import main.java.com.ubo.tp.twitub.ihm.twit.TwitPageController;
 import main.java.com.ubo.tp.twitub.ihm.user.UsersPageController;
+import main.java.com.ubo.tp.twitub.newObserver.IMenuBarObserver;
 import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observer.IMenuBarObserver;
 
 import javax.swing.*;
 import java.awt.*;

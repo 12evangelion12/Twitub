@@ -20,22 +20,18 @@ public class User {
      * <i>Doit être unique dans le système</i>
      */
     protected final String mUserTag;
-
-    /**
-     * Mot de passe de l'utilisateur.
-     */
-    protected String mUserPassword;
-
-    /**
-     * Nom de l'utilisateur.
-     */
-    protected String mName;
-
     /**
      * Liste des tags suivis par l'utilisateur.
      */
     protected final Set<String> mFollows;
-
+    /**
+     * Mot de passe de l'utilisateur.
+     */
+    protected String mUserPassword;
+    /**
+     * Nom de l'utilisateur.
+     */
+    protected String mName;
     /**
      * Chemin d'accès à l'image de l'avatar de l'utilisateur.
      */

@@ -6,6 +6,7 @@ import main.java.com.ubo.tp.twitub.newObserver.ITwitSendComponentObserver;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JTwitSend implements JComponent, ITwitSendComponentObserver {
 
@@ -52,8 +53,13 @@ public class JTwitSend implements JComponent, ITwitSendComponentObserver {
     }
 
     public void initTwitButtonEvent(MouseAdapter mouseAdapter) {
-        twitMessage = twitTextArea.getText();
-        twitSendButton.addMouseListener(mouseAdapter);
+        twitSendButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                twitMessage = twitTextArea.getText();
+                mouseAdapter.mouseClicked(e);
+            }
+        });
     }
 
     public String getTwitMessage() {

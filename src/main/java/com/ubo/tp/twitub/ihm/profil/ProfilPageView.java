@@ -17,12 +17,12 @@ import java.util.List;
 
 public class ProfilPageView implements IPage.IView {
 
-    private JPanel jPanel;
     private final UserProfil userProfil;
-    private JUserProfil jUserProfil;
-    private JUserList jUserList;
     private final List<User> followers;
     private final List<IUserFollowObserver> userFollowObserverList;
+    private JPanel jPanel;
+    private JUserProfil jUserProfil;
+    private JUserList jUserList;
 
     public ProfilPageView(UserProfil userProfil, List<User> followers) {
         userFollowObserverList = new ArrayList<>();

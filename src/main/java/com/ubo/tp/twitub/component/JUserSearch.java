@@ -12,10 +12,10 @@ import java.util.List;
 
 public class JUserSearch implements JComponent {
 
+    private final List<ISearchItemObserver> searchItems;
     private JPanel jPanel;
     private JTextField searchText;
     private JButton searchButton;
-    private final List<ISearchItemObserver> searchItems;
 
     public JUserSearch() {
         searchItems = new ArrayList<>();

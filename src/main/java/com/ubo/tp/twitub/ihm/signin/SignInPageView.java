@@ -14,10 +14,10 @@ import java.util.List;
 
 public class SignInPageView implements IPage.IView {
 
+    private final List<ISignInObserver> signInObservers;
     private JPanel jPanel;
     private JButton signInButton;
     private JButton signUpButton;
-    private final List<ISignInObserver> signInObservers;
     private JTextField userField;
     private JPasswordField passwordField;
 

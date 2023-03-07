@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class JTwitList implements JComponent, ITwitListModelObserver {
 
+    private final TwitListModel twits;
     private JPanel jPanel;
     private JScrollPane jScrollPane;
-    private final TwitListModel twits;
 
     public JTwitList(TwitListModel twits) {
         this.twits = twits;

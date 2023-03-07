@@ -14,8 +14,8 @@ import java.io.IOException;
 
 public class JUser implements JComponent {
 
-    private JPanel jPanel;
     private final User user;
+    private JPanel jPanel;
     private JToggleButton followed;
     private boolean followSelected;
 
