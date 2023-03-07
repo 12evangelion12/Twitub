@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.events.file;
+package com.ubo.tp.twitub.events.file;
 
 /**
  * Interface de l'entité responsable de la surveillance d'un répertoire.

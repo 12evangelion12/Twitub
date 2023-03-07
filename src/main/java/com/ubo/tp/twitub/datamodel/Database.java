@@ -1,6 +1,6 @@
-package main.java.com.ubo.tp.twitub.datamodel;
+package com.ubo.tp.twitub.datamodel;
 
-import main.java.com.ubo.tp.twitub.common.Constants;
+import com.ubo.tp.twitub.common.Constants;
 
 import java.util.HashSet;
 import java.util.Set;

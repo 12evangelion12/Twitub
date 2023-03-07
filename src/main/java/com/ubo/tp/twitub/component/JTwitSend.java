@@ -1,14 +1,14 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitSendComponentObserver;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.newObserver.ITwitObserver;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class JTwitSend implements JComponent, ITwitSendComponentObserver {
+public class JTwitSend implements JComponent, ITwitObserver {
 
     private final User session;
     private JPanel jPanel;

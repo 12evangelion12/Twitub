@@ -1,6 +1,6 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.datamodel.User;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,16 +12,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class JUserList implements JComponent {
 
-    private final List<User> userList;
     private final User session;
+    private final List<User> users;
     private JScrollPane jScrollPane;
     private User selectedUser;
     private boolean followingButtonState;
     private MouseAdapter mouseAdapter;
 
-    public JUserList(List<User> userList, User session) {
-        this.userList = userList;
+    public JUserList(User session, List<User> users) {
         this.session = session;
+        this.users = users;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class JUserList implements JComponent {
         JPanel jPanel = new JPanel(new GridBagLayout());
         AtomicInteger yPos = new AtomicInteger(0);
 
-        userList.forEach(user -> {
+        users.forEach(user -> {
 
             JUser jUser = new JUser(user, session.getFollows().contains(user.getUserTag()));
             jUser.initGUI();
@@ -69,4 +69,6 @@ public class JUserList implements JComponent {
     public Component getComponent() {
         return jScrollPane;
     }
+
+
 }

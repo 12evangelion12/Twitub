@@ -1,9 +1,9 @@
-package main.java.com.ubo.tp.twitub.common;
+package com.ubo.tp.twitub.common;
 
-import main.java.com.ubo.tp.twitub.core.EntityManager;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.events.file.IWatchableDirectory;
-import main.java.com.ubo.tp.twitub.events.file.WatchableDirectory;
+import com.ubo.tp.twitub.core.EntityManager;
+import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.events.file.IWatchableDirectory;
+import com.ubo.tp.twitub.events.file.WatchableDirectory;
 
 import javax.swing.*;
 import java.io.File;

@@ -1,18 +1,17 @@
-package main.java.com.ubo.tp.twitub.ihm;
+package com.ubo.tp.twitub.ihm;
 
-import main.java.com.ubo.tp.twitub.common.SharedDirectoryManager;
-import main.java.com.ubo.tp.twitub.component.JNavBarComponent;
-import main.java.com.ubo.tp.twitub.component.JSignoutConponent;
-import main.java.com.ubo.tp.twitub.core.EntityManager;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.profil.ProfilPageController;
-import main.java.com.ubo.tp.twitub.ihm.signin.SignInPageController;
-import main.java.com.ubo.tp.twitub.ihm.signup.SignUpPageController;
-import main.java.com.ubo.tp.twitub.ihm.twit.TwitPageController;
-import main.java.com.ubo.tp.twitub.ihm.user.UsersPageController;
-import main.java.com.ubo.tp.twitub.newObserver.IMenuBarObserver;
-import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.common.SharedDirectoryManager;
+import com.ubo.tp.twitub.component.JNavBarComponent;
+import com.ubo.tp.twitub.component.JSignoutConponent;
+import com.ubo.tp.twitub.core.EntityManager;
+import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.signin.SignInPageController;
+import com.ubo.tp.twitub.ihm.signup.SignUpPageController;
+import com.ubo.tp.twitub.ihm.twit.TwitPageController;
+import com.ubo.tp.twitub.ihm.user.UsersPageController;
+import com.ubo.tp.twitub.newObserver.IAccountObserver;
+import com.ubo.tp.twitub.newObserver.IMenuBarObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,11 +88,11 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
 
     @Override
     public void notifyShowProfilPage(User user) {
-
+        /* TODO
         ProfilPageController profilPageController = new ProfilPageController(user, mDatabase, mEntityManager);
         profilPageController.init();
         profilPageController.addObserver(this);
-        changeView(profilPageController.show(), true);
+        changeView(profilPageController.show(), true);*/
     }
 
     private void initNavBarListener(JNavBarComponent navBarComponent) {

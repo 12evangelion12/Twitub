@@ -1,10 +1,10 @@
-package main.java.com.ubo.tp.twitub.datamodel.converter;
+package com.ubo.tp.twitub.datamodel.converter;
 
-import main.java.com.ubo.tp.twitub.common.Constants;
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.datamodel.jaxb.bean.twit.TwitXml;
-import main.java.com.ubo.tp.twitub.datamodel.jaxb.bean.user.UserXml;
+import com.ubo.tp.twitub.common.Constants;
+import com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.datamodel.jaxb.bean.twit.TwitXml;
+import com.ubo.tp.twitub.datamodel.jaxb.bean.user.UserXml;
 
 import java.util.HashSet;
 import java.util.Map;

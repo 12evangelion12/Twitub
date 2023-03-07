@@ -1,7 +1,7 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.common.Constants;
-import main.java.com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.common.Constants;
+import com.ubo.tp.twitub.datamodel.User;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,9 +15,9 @@ import java.io.IOException;
 public class JUser implements JComponent {
 
     private final User user;
+    private final boolean followSelected;
     private JPanel jPanel;
     private JToggleButton followed;
-    private boolean followSelected;
 
     public JUser(User user, boolean followSelected) {
         this.user = user;
@@ -48,10 +48,10 @@ public class JUser implements JComponent {
         }
         GridBagConstraints userProfilContraint = new GridBagConstraints(0, 0, 1, 2, 1, 1, GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0);
 
-        JLabel userTag = new JLabel("pseudo: " + user.getUserTag());
+        JLabel userTag = new JLabel("userTag: @" + user.getUserTag());
         GridBagConstraints userTagContraint = new GridBagConstraints(1, 0, 2, 1, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0);
 
-        JLabel userName = new JLabel("nom: " + user.getName());
+        JLabel userName = new JLabel("utilisateur: " + user.getName());
         GridBagConstraints userNameContraint = new GridBagConstraints(1, 1, 2, 1, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0);
 
         followed = new JToggleButton();

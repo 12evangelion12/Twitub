@@ -1,8 +1,8 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.model.TwitListModel;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitListModelObserver;
+import com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.model.TwitListModel;
+import com.ubo.tp.twitub.newObserver.ITwitObserver;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class JTwitList implements JComponent, ITwitListModelObserver {
+public class JTwitList implements JComponent, ITwitObserver {
 
     private final TwitListModel twits;
     private JPanel jPanel;
@@ -54,8 +54,6 @@ public class JTwitList implements JComponent, ITwitListModelObserver {
 
     @Override
     public void notifyTwitListChanged(List<Twit> twits) {
-
-        System.out.println(twits);
 
         if (jScrollPane != null) {
             jPanel.removeAll();

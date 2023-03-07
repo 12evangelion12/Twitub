@@ -1,8 +1,8 @@
-package main.java.com.ubo.tp.twitub.datamodel.jaxb;
+package com.ubo.tp.twitub.datamodel.jaxb;
 
-import main.java.com.ubo.tp.twitub.common.FilesUtils;
-import main.java.com.ubo.tp.twitub.datamodel.jaxb.bean.twit.TwitXml;
-import main.java.com.ubo.tp.twitub.datamodel.jaxb.bean.user.UserXml;
+import com.ubo.tp.twitub.common.FilesUtils;
+import com.ubo.tp.twitub.datamodel.jaxb.bean.twit.TwitXml;
+import com.ubo.tp.twitub.datamodel.jaxb.bean.user.UserXml;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;

@@ -1,6 +1,6 @@
-package main.java.com.ubo.tp.twitub.ihm;
+package com.ubo.tp.twitub.ihm;
 
-import main.java.com.ubo.tp.twitub.newObserver.IMenuBarObserver;
+import com.ubo.tp.twitub.newObserver.IMenuBarObserver;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

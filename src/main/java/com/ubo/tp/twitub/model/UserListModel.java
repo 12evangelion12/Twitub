@@ -1,25 +1,30 @@
-package main.java.com.ubo.tp.twitub.model;
+package com.ubo.tp.twitub.model;
 
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.observer.IUserObserver;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.newObserver.IUserObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserListModel {
 
-    User session;
-    List<User> users;
-    List<IUserObserver> userObservers;
+    private final List<IUserObserver> userObservers;
+    private List<User> users;
+    private User session;
 
-    public UserListModel(User session) {
-        this.session = session;
-        users = new ArrayList<>();
+    public UserListModel(User session, List<User> users) {
         userObservers = new ArrayList<>();
+        this.users = users;
+        this.session = session;
     }
 
     public User getSession() {
         return session;
+    }
+
+    public void setSession(User session) {
+        this.session = session;
+        userObservers.forEach(observer -> observer.updateUserList(session));
     }
 
     public List<User> getUsers() {
@@ -28,7 +33,6 @@ public class UserListModel {
 
     public void setUsers(List<User> users) {
         this.users = users;
-        userObservers.forEach(IUserObserver::notifyUserChanged);
     }
 
     public void addObserver(IUserObserver observer) {

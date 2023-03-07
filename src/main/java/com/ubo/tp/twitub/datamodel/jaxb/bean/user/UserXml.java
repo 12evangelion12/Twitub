@@ -5,7 +5,7 @@
 // Generated on: 2015.02.22 at 01:32:54 PM CET 
 //
 
-package main.java.com.ubo.tp.twitub.datamodel.jaxb.bean.user;
+package com.ubo.tp.twitub.datamodel.jaxb.bean.user;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;

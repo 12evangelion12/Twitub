@@ -1,25 +1,10 @@
-package main.java.com.ubo.tp.twitub.ihm.profil;
+package com.ubo.tp.twitub.ihm.profil;
 
-import main.java.com.ubo.tp.twitub.component.JUserList;
-import main.java.com.ubo.tp.twitub.component.JUserProfil;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.model.UserProfil;
-import main.java.com.ubo.tp.twitub.observer.IUserFollowObserver;
-
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProfilPageView implements IPage.IView {
-
+public class ProfilPageView {
+/*
     private final UserProfil userProfil;
     private final List<User> followers;
-    private final List<IUserFollowObserver> userFollowObserverList;
+    private final List<IUserObserver> userFollowObserverList;
     private JPanel jPanel;
     private JUserProfil jUserProfil;
     private JUserList jUserList;
@@ -87,7 +72,7 @@ public class ProfilPageView implements IPage.IView {
         });
     }
 
-    public void addFollowUserObserver(IUserFollowObserver observer) {
+    public void addFollowUserObserver(IUserObserver observer) {
         userFollowObserverList.add(observer);
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.events.file;
+package com.ubo.tp.twitub.events.file;
 
 import java.io.File;
 import java.util.HashMap;

@@ -1,8 +1,9 @@
-package main.java.com.ubo.tp.twitub.observer;
+package com.ubo.tp.twitub.observer;
 
-import main.java.com.ubo.tp.twitub.datamodel.IDatabaseObserver;
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
+import com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.datamodel.User;
+
 
 public class DataBaseObserverImpl implements IDatabaseObserver {
 

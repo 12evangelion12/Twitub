@@ -1,14 +1,14 @@
-package main.java.com.ubo.tp.twitub.model;
+package com.ubo.tp.twitub.model;
 
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitListModelObserver;
+import com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.newObserver.ITwitObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TwitListModel {
 
-    private final List<ITwitListModelObserver> twitListModelObservers;
+    private final List<ITwitObserver> twitListModelObservers;
     private List<Twit> twits;
 
     public TwitListModel() {
@@ -24,7 +24,7 @@ public class TwitListModel {
         twitListModelObservers.forEach(observer -> observer.notifyTwitListChanged(twits));
     }
 
-    public void addObserver(ITwitListModelObserver observer) {
+    public void addObserver(ITwitObserver observer) {
         twitListModelObservers.add(observer);
     }
 }

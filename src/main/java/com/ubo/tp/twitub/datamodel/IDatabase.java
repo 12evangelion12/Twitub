@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.datamodel;
+package com.ubo.tp.twitub.datamodel;
 
 import java.util.Set;
 

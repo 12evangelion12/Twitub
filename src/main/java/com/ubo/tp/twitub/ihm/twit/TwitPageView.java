@@ -1,12 +1,11 @@
-package main.java.com.ubo.tp.twitub.ihm.twit;
+package com.ubo.tp.twitub.ihm.twit;
 
-import main.java.com.ubo.tp.twitub.component.JTwitList;
-import main.java.com.ubo.tp.twitub.component.JTwitSend;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.model.TwitListModel;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitControllerObserver;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitSendComponentObserver;
+import com.ubo.tp.twitub.component.JTwitList;
+import com.ubo.tp.twitub.component.JTwitSend;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.model.TwitListModel;
+import com.ubo.tp.twitub.newObserver.ITwitObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,15 +18,15 @@ public class TwitPageView implements IPage.IView {
 
     private final TwitListModel twits;
     private final User session;
-    private final List<ITwitSendComponentObserver> twitSendComponentObserverList;
-    private final List<ITwitControllerObserver> twitControllerObservers;
+    private final List<ITwitObserver> twitObservers;
+    private final List<ITwitObserver> twitControllerObservers;
     private JPanel jPanel;
     private JTwitList jTwitList;
     private JTwitSend jTwitSend;
 
     public TwitPageView(User session, TwitListModel twits) {
         twitControllerObservers = new ArrayList<>();
-        twitSendComponentObserverList = new ArrayList<>();
+        twitObservers = new ArrayList<>();
         this.session = session;
         this.twits = twits;
     }
@@ -40,7 +39,7 @@ public class TwitPageView implements IPage.IView {
 
         jTwitSend = new JTwitSend(session);
         jTwitSend.initGUI();
-        twitSendComponentObserverList.add(jTwitSend);
+        twitObservers.add(jTwitSend);
         GridBagConstraints jTwitSendContraint = new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(20, 0, 0, 20), 0, 0);
         initSendTwitButton();
 
@@ -67,22 +66,22 @@ public class TwitPageView implements IPage.IView {
                 String twitMessage = jTwitSend.getTwitMessage();
 
                 if (twitMessage.length() == 0) {
-                    twitSendComponentObserverList.forEach(ITwitSendComponentObserver::notifyTwitIsEmpty);
+                    twitObservers.forEach(ITwitObserver::notifyTwitIsEmpty);
                     return;
                 }
 
                 if (twitMessage.length() > 250) {
-                    twitSendComponentObserverList.forEach(ITwitSendComponentObserver::notifyTwitIsTooLong);
+                    twitObservers.forEach(ITwitObserver::notifyTwitIsTooLong);
                     return;
                 }
 
-                twitSendComponentObserverList.forEach(ITwitSendComponentObserver::notifyTwitAccepted);
-                twitControllerObservers.forEach(iTwitControllerObserver -> iTwitControllerObserver.sendTwit(session, twitMessage));
+                twitObservers.forEach(ITwitObserver::notifyTwitAccepted);
+                twitControllerObservers.forEach(iTwitObserver -> iTwitObserver.sendTwit(session, twitMessage));
             }
         });
     }
 
-    public void addController(ITwitControllerObserver observer) {
+    public void addController(ITwitObserver observer) {
         twitControllerObservers.add(observer);
     }
 }

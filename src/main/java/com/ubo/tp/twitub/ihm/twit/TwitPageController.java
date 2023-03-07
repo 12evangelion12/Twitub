@@ -1,20 +1,20 @@
-package main.java.com.ubo.tp.twitub.ihm.twit;
+package com.ubo.tp.twitub.ihm.twit;
 
-import main.java.com.ubo.tp.twitub.core.EntityManager;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabaseObserver;
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.model.TwitListModel;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitControllerObserver;
-import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.core.EntityManager;
+import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
+import com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.model.TwitListModel;
+import com.ubo.tp.twitub.newObserver.IAccountObserver;
+import com.ubo.tp.twitub.newObserver.ITwitObserver;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TwitPageController implements IPage.IController, IDatabaseObserver, ITwitControllerObserver {
+public class TwitPageController implements IPage.IController, IDatabaseObserver, ITwitObserver {
 
     private final TwitPageView twitPageView;
     private final TwitListModel twitListModel;
@@ -59,13 +59,4 @@ public class TwitPageController implements IPage.IController, IDatabaseObserver,
         Twit twit = new Twit(user, twitMessage);
         entityManager.sendTwit(twit);
     }
-
-    /*if (twitString.length() > 250) {
-            twitStateObservers.forEach(ITwitStateObserver::twitTooLong);
-            return;
-        }
-
-        Twit twit = new Twit(user, twitString);
-        entityManager.sendTwit(twit);
-        twitStateObservers.forEach(ITwitStateObserver::twitAccepted);*/
 }

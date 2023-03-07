@@ -1,17 +1,15 @@
-package main.java.com.ubo.tp.twitub.ihm.signup;
+package com.ubo.tp.twitub.ihm.signup;
 
-import main.java.com.ubo.tp.twitub.core.EntityManager;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabaseObserver;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.newObserver.ISignUpControllerObserver;
-import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.common.ResourceManager;
+import com.ubo.tp.twitub.core.EntityManager;
+import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.newObserver.IAccountObserver;
+import com.ubo.tp.twitub.newObserver.ISignUpControllerObserver;
 
 import java.awt.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +22,7 @@ public class SignUpPageController implements IPage.IController, IDatabaseObserve
     private final SignUpPageView signUpPageView;
     private final List<IAccountObserver> accountObservers;
     private final List<ISignUpControllerObserver> signUpStateObservers;
+    private User userAdded;
 
     public SignUpPageController(IDatabase database, EntityManager entityManager) {
         this.database = database;
@@ -64,26 +63,26 @@ public class SignUpPageController implements IPage.IController, IDatabaseObserve
                 signUpStateObservers.forEach(ISignUpControllerObserver::usertagAlreadyUse);
                 return;
             }
+
+            if (user.getName().equalsIgnoreCase(username)) {
+                signUpStateObservers.forEach(ISignUpControllerObserver::usernameAlreadyExist);
+                return;
+            }
         }
 
-        URL res = getClass().getClassLoader().getResource("images/userIcon.png");
-        String absolutePath = null;
-        try {
-            absolutePath = Paths.get(res.toURI()).toFile().getAbsolutePath();
-        } catch (URISyntaxException e) {
-            System.out.println("PAS BON");
-            e.printStackTrace();
-        }
-        System.out.println(absolutePath);
-
-        User user = new User(UUID.randomUUID(), usertag, password, username, new HashSet<>(), "src/main/resources/images/userProfil.png");
+        User user = new User(UUID.randomUUID(), usertag, password, username, new HashSet<>(), ResourceManager.getResource("/images/userProfil.png").getPath());
         entityManager.sendUser(user);
+        userAdded = user;
     }
 
     @Override
     public void notifyUserAdded(User addedUser) {
-        signUpStateObservers.forEach(ISignUpControllerObserver::registerSuccess);
+        //Lorsqu'un utilisateur est ajouté on vérifie que c'est notre instance qui a ajouter l'utilisateur pour afficher la popup
+        if (addedUser.equals(userAdded)) {
+            signUpStateObservers.forEach(ISignUpControllerObserver::registerSuccess);
+        }
     }
+
 
     @Override
     public void cancelRegister() {

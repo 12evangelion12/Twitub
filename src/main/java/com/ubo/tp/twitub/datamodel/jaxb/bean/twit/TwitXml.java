@@ -5,7 +5,7 @@
 // Generated on: 2015.02.22 at 04:58:02 PM CET 
 //
 
-package main.java.com.ubo.tp.twitub.datamodel.jaxb.bean.twit;
+package com.ubo.tp.twitub.datamodel.jaxb.bean.twit;
 
 import javax.xml.bind.annotation.*;
 

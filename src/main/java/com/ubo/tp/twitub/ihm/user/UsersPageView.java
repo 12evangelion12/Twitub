@@ -1,11 +1,11 @@
-package main.java.com.ubo.tp.twitub.ihm.user;
+package com.ubo.tp.twitub.ihm.user;
 
-import main.java.com.ubo.tp.twitub.component.JUserList;
-import main.java.com.ubo.tp.twitub.component.JUserSearch;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observer.ISearchItemObserver;
-import main.java.com.ubo.tp.twitub.observer.IUserFollowObserver;
+import com.ubo.tp.twitub.component.JUserList;
+import com.ubo.tp.twitub.component.JUserSearch;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.model.UserListModel;
+import com.ubo.tp.twitub.newObserver.IUserObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,18 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UsersPageView implements IPage.IView, ISearchItemObserver {
+public class UsersPageView implements IPage.IView, IUserObserver {
 
-    private final List<User> users;
-    private final User session;
-    private final List<IUserFollowObserver> userFollowObserverList;
+    private final UserListModel userListModel;
+    private final List<IUserObserver> userObservers;
     private JPanel jPanel;
     private JUserSearch jUserSearch;
+    private JUserList jUserList;
 
-    public UsersPageView(List<User> users, User session) {
-        this.session = session;
-        userFollowObserverList = new ArrayList<>();
-        this.users = users;
+    public UsersPageView(UserListModel userListModel) {
+        this.userListModel = userListModel;
+        this.userListModel.addObserver(this);
+        userObservers = new ArrayList<>();
     }
 
     @Override
@@ -41,52 +41,70 @@ public class UsersPageView implements IPage.IView, ISearchItemObserver {
 
         jUserSearch = new JUserSearch();
         jUserSearch.initGUI();
-        jUserSearch.addObserver(this);
+        initUserSearchMouseAdapter();
         GridBagConstraints jUserSearchContraint = new GridBagConstraints(0, 0, 1, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(20, 0, 0, 20), 0, 0);
 
         jPanel.add(jUserSearch.getComponent(), jUserSearchContraint);
-        showUsers(users);
+        showUsers();
     }
 
     @Override
-    public void notifySearchButtonClicked() {
+    public void notifySearchUserButtonClicked() {
 
         jPanel.remove(1);
-        showUsers(parseUsers(jUserSearch.getSearchingText()));
+        showUsers();
     }
 
-    private List<User> parseUsers(String texte) {
-
-        List<User> tempUsers = new ArrayList<>(users);
-        return tempUsers.stream().filter(user -> user.getUserTag().contains(texte)).collect(Collectors.toList());
+    private List<User> parseUsers(List<User> users, String texte) {
+        return users.stream().filter(user -> user.getUserTag().contains(texte)).collect(Collectors.toList());
     }
 
-    private void showUsers(List<User> users) {
+    private void showUsers() {
 
-        JUserList userList = new JUserList(users, session);
-        initMouseAdapter(userList);
-        userList.initGUI();
+        List<User> tempList = new ArrayList<>(userListModel.getUsers());
+        if (jUserSearch.getSearchingText() != null && !jUserSearch.getSearchingText().isEmpty()) {
+            userListModel.setUsers(parseUsers(tempList, jUserSearch.getSearchingText()));
+        }
+
+        jUserList = new JUserList(userListModel.getSession(), userListModel.getUsers());
+        initUserListMouseAdapter();
+        jUserList.initGUI();
         GridBagConstraints userListContraint = new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(20, 0, 0, 20), 0, 0);
-        jPanel.add(userList.getComponent(), userListContraint);
+        jPanel.add(jUserList.getComponent(), userListContraint);
 
         jPanel.revalidate();
         jPanel.repaint();
     }
 
-    private void initMouseAdapter(JUserList userList) {
-        userList.setMouseAdapter(new MouseAdapter() {
+    private void initUserSearchMouseAdapter() {
+        jUserSearch.initSearchButtonListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (userList.getFollowingButtonState()) {
-                    userFollowObserverList.forEach(observer -> observer.notifyUserFollow(userList.getSelectedUser()));
+                userObservers.forEach(IUserObserver::notifySearchUserButtonClicked);
+            }
+        });
+    }
+
+    private void initUserListMouseAdapter() {
+        jUserList.setMouseAdapter(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (jUserList.getFollowingButtonState()) {
+                    userObservers.forEach(observer -> observer.notifyUserFollow(jUserList.getSelectedUser()));
                 } else {
-                    userFollowObserverList.forEach(observer -> observer.notifyUserUnfollow(userList.getSelectedUser()));
+                    userObservers.forEach(observer -> observer.notifyUserUnfollow(jUserList.getSelectedUser()));
                 }
             }
         });
     }
 
-    public void addFollowUserObserver(IUserFollowObserver observer) {
-        userFollowObserverList.add(observer);
+    public void addObserver(IUserObserver observer) {
+        userObservers.add(observer);
+    }
+
+    @Override
+    public void updateUserList(User session) {
+        jPanel.remove(1);
+        showUsers();
     }
 }

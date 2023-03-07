@@ -1,24 +1,7 @@
-package main.java.com.ubo.tp.twitub.ihm.profil;
+package com.ubo.tp.twitub.ihm.profil;
 
-import main.java.com.ubo.tp.twitub.core.EntityManager;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabaseObserver;
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.model.UserProfil;
-import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observer.IUserFollowObserver;
-import main.java.com.ubo.tp.twitub.observer.IUserProfilChangeObserver;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-public class ProfilPageController implements IPage.IController, IUserProfilChangeObserver, IUserFollowObserver, IDatabaseObserver {
-
+public class ProfilPageController {
+/*
     private final List<IAccountObserver> accountObserverList;
     private final ProfilPageView profilPageView;
     private final IDatabase database;
@@ -101,5 +84,5 @@ public class ProfilPageController implements IPage.IController, IUserProfilChang
             int userTwitCount = (int) twits.stream().filter(twit -> twit.getTwiter().getUserTag().equalsIgnoreCase(session.getUserTag())).count();
             profilPageView.updateUserTwitCount(userTwitCount);
         }
-    }
+    }*/
 }

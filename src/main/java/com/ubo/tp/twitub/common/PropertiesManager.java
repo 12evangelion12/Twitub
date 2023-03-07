@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.common;
+package com.ubo.tp.twitub.common;
 
 import java.io.File;
 import java.io.FileInputStream;
