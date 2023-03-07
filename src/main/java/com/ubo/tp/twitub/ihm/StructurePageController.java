@@ -1,18 +1,18 @@
-package main.java.com.ubo.tp.twitub.ihm;
+package com.ubo.tp.twitub.ihm;
 
-import main.java.com.ubo.tp.twitub.common.SharedDirectoryManager;
-import main.java.com.ubo.tp.twitub.component.JNavBarComponent;
-import main.java.com.ubo.tp.twitub.component.JSignoutConponent;
-import main.java.com.ubo.tp.twitub.core.EntityManager;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.profil.ProfilPageController;
-import main.java.com.ubo.tp.twitub.ihm.signin.SignInPageController;
-import main.java.com.ubo.tp.twitub.ihm.signup.SignUpPageController;
-import main.java.com.ubo.tp.twitub.ihm.twit.TwitPageController;
-import main.java.com.ubo.tp.twitub.ihm.user.UsersPageController;
-import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observer.IMenuBarObserver;
+import com.ubo.tp.twitub.common.SharedDirectoryManager;
+import com.ubo.tp.twitub.component.JNavBarComponent;
+import com.ubo.tp.twitub.component.JSignoutConponent;
+import com.ubo.tp.twitub.core.EntityManager;
+import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.profil.ProfilPageController;
+import com.ubo.tp.twitub.ihm.signin.SignInPageController;
+import com.ubo.tp.twitub.ihm.signup.SignUpPageController;
+import com.ubo.tp.twitub.ihm.twit.TwitPageController;
+import com.ubo.tp.twitub.ihm.user.UsersPageController;
+import com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.observer.IMenuBarObserver;
 
 import javax.swing.*;
 import java.awt.*;

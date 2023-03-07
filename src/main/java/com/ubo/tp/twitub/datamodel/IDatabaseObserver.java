@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.datamodel;
+package com.ubo.tp.twitub.datamodel;
 
 /**
  * Interface des observateurs des modifications de la base de données.

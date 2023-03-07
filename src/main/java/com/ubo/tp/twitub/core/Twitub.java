@@ -1,13 +1,14 @@
-package main.java.com.ubo.tp.twitub.core;
+package com.ubo.tp.twitub.core;
 
-import main.java.com.ubo.tp.twitub.common.Constants;
-import main.java.com.ubo.tp.twitub.common.PropertiesManager;
-import main.java.com.ubo.tp.twitub.common.SharedDirectoryManager;
-import main.java.com.ubo.tp.twitub.datamodel.Database;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.ihm.StructurePageController;
-import main.java.com.ubo.tp.twitub.ihm.TwitubMock;
-import main.java.com.ubo.tp.twitub.observer.DataBaseObserverImpl;
+
+import com.ubo.tp.twitub.common.Constants;
+import com.ubo.tp.twitub.common.PropertiesManager;
+import com.ubo.tp.twitub.common.SharedDirectoryManager;
+import com.ubo.tp.twitub.datamodel.Database;
+import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.ihm.StructurePageController;
+import com.ubo.tp.twitub.ihm.TwitubMock;
+import com.ubo.tp.twitub.observer.DataBaseObserverImpl;
 
 import javax.swing.*;
 

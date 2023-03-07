@@ -1,13 +1,14 @@
-package main.java.com.ubo.tp.twitub.ihm.signup;
+package com.ubo.tp.twitub.ihm.signup;
 
-import main.java.com.ubo.tp.twitub.common.ResourceManager;
-import main.java.com.ubo.tp.twitub.core.EntityManager;
-import main.java.com.ubo.tp.twitub.datamodel.IDatabase;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
-import main.java.com.ubo.tp.twitub.observer.ISignUpObserver;
-import main.java.com.ubo.tp.twitub.observer.ISignUpStateObserver;
+
+import com.ubo.tp.twitub.common.ResourceManager;
+import com.ubo.tp.twitub.core.EntityManager;
+import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.observer.ISignUpObserver;
+import com.ubo.tp.twitub.observer.ISignUpStateObserver;
 
 import java.awt.*;
 import java.util.ArrayList;

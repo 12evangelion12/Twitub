@@ -1,11 +1,12 @@
-package main.java.com.ubo.tp.twitub.ihm.user;
+package com.ubo.tp.twitub.ihm.user;
 
-import main.java.com.ubo.tp.twitub.component.JUserList;
-import main.java.com.ubo.tp.twitub.component.JUserSearch;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observer.ISearchItemObserver;
-import main.java.com.ubo.tp.twitub.observer.IUserFollowObserver;
+
+import com.ubo.tp.twitub.component.JUserList;
+import com.ubo.tp.twitub.component.JUserSearch;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.observer.ISearchItemObserver;
+import com.ubo.tp.twitub.observer.IUserFollowObserver;
 
 import javax.swing.*;
 import java.awt.*;

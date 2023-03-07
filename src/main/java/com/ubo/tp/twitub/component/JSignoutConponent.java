@@ -1,6 +1,6 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.observer.IAccountObserver;
 
 import javax.swing.*;
 import java.awt.*;

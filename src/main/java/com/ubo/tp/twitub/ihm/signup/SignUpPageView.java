@@ -1,9 +1,10 @@
-package main.java.com.ubo.tp.twitub.ihm.signup;
+package com.ubo.tp.twitub.ihm.signup;
 
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observer.ISignUpObserver;
-import main.java.com.ubo.tp.twitub.observer.ISignUpStateObserver;
+
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.observer.ISignUpObserver;
+import com.ubo.tp.twitub.observer.ISignUpStateObserver;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

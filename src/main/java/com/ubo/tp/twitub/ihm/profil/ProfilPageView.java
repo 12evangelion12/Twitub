@@ -1,11 +1,12 @@
-package main.java.com.ubo.tp.twitub.ihm.profil;
+package com.ubo.tp.twitub.ihm.profil;
 
-import main.java.com.ubo.tp.twitub.component.JUserList;
-import main.java.com.ubo.tp.twitub.component.JUserProfil;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.model.UserProfil;
-import main.java.com.ubo.tp.twitub.observer.IUserFollowObserver;
+
+import com.ubo.tp.twitub.component.JUserList;
+import com.ubo.tp.twitub.component.JUserProfil;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.model.UserProfil;
+import com.ubo.tp.twitub.observer.IUserFollowObserver;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

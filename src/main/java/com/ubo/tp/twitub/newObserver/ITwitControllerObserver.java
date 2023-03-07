@@ -1,6 +1,7 @@
-package main.java.com.ubo.tp.twitub.newObserver;
+package com.ubo.tp.twitub.newObserver;
 
-import main.java.com.ubo.tp.twitub.datamodel.User;
+
+import com.ubo.tp.twitub.datamodel.User;
 
 public interface ITwitControllerObserver {
 

@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.twitub.observer;
+package com.ubo.tp.twitub.observer;
 
 public interface ISignInObserver {
 

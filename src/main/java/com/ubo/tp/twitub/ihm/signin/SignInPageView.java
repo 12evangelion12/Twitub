@@ -1,7 +1,8 @@
-package main.java.com.ubo.tp.twitub.ihm.signin;
+package com.ubo.tp.twitub.ihm.signin;
 
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.observer.ISignInObserver;
+
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.observer.ISignInObserver;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

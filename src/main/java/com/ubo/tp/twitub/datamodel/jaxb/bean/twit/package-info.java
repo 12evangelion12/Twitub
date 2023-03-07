@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.example.org/twit/")
-package main.java.com.ubo.tp.twitub.datamodel.jaxb.bean.twit;
+package com.ubo.tp.twitub.datamodel.jaxb.bean.twit;

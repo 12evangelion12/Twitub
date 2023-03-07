@@ -1,8 +1,8 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.model.TwitListModel;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitListModelObserver;
+import com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.model.TwitListModel;
+import com.ubo.tp.twitub.newObserver.ITwitListModelObserver;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

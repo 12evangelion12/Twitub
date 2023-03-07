@@ -1,6 +1,6 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.datamodel.Twit;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

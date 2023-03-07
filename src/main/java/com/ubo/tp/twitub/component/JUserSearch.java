@@ -1,6 +1,7 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.observer.ISearchItemObserver;
+
+import com.ubo.tp.twitub.observer.ISearchItemObserver;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

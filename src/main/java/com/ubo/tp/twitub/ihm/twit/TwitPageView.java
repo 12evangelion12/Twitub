@@ -1,12 +1,13 @@
-package main.java.com.ubo.tp.twitub.ihm.twit;
+package com.ubo.tp.twitub.ihm.twit;
 
-import main.java.com.ubo.tp.twitub.component.JTwitList;
-import main.java.com.ubo.tp.twitub.component.JTwitSend;
-import main.java.com.ubo.tp.twitub.datamodel.User;
-import main.java.com.ubo.tp.twitub.ihm.IPage;
-import main.java.com.ubo.tp.twitub.model.TwitListModel;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitControllerObserver;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitSendComponentObserver;
+
+import com.ubo.tp.twitub.component.JTwitList;
+import com.ubo.tp.twitub.component.JTwitSend;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.model.TwitListModel;
+import com.ubo.tp.twitub.newObserver.ITwitControllerObserver;
+import com.ubo.tp.twitub.newObserver.ITwitSendComponentObserver;
 
 import javax.swing.*;
 import java.awt.*;

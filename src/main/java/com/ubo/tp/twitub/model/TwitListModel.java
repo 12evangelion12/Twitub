@@ -1,7 +1,8 @@
-package main.java.com.ubo.tp.twitub.model;
+package com.ubo.tp.twitub.model;
 
-import main.java.com.ubo.tp.twitub.datamodel.Twit;
-import main.java.com.ubo.tp.twitub.newObserver.ITwitListModelObserver;
+
+import com.ubo.tp.twitub.datamodel.Twit;
+import com.ubo.tp.twitub.newObserver.ITwitListModelObserver;
 
 import java.util.ArrayList;
 import java.util.List;

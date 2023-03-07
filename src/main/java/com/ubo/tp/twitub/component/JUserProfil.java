@@ -1,6 +1,6 @@
-package main.java.com.ubo.tp.twitub.component;
+package com.ubo.tp.twitub.component;
 
-import main.java.com.ubo.tp.twitub.model.UserProfil;
+import com.ubo.tp.twitub.model.UserProfil;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
