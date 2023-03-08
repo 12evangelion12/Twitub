@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:sonar="antlib:org.sonar.ant" name="Simple Project analyzed with the SonarQube Scanner for Ant"
+         basedir=".">
+
+    <!-- Define the SonarQube global properties (the most usual way is to pass these properties via the command line) -->
+    <property name="sonar.host.url" value="http://localhost:9000"/>
+    <property name="sonar.projectKey" value="Twittub"/>
+
+    <property name="sonar.login" value="sqp_93318f8ef5c143e7bf3616caf6f5455375505bae"/>
+    <property name="sonar.projectName" value="Twittub"/>
+    <property name="sonar.projectVersion" value="1.0"/>
+    <property name="sonar.sources" value="src"/>
+    <property name="sonar.java.binaries" value="build"/>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="oata.HelloWorld"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/HelloWorld.jar" fork="true"/>
+    </target>
+
+    <!-- ========= Define SonarQube Scanner for Ant Target ========= -->
+    <target name="sonar">
+        <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+            <!-- Update the following line, or put the "sonar-ant-task-*.jar" file in your "$HOME/.ant/lib" folder -->
+            <classpath path="H:\Bureau\sonarqube-ant-task-2.7.1.1951.jar"/>
+        </taskdef>
+
+        <!-- Execute SonarQube Scanner for Ant Analysis -->
+        <sonar:sonar/>
+    </target>
+</project>
