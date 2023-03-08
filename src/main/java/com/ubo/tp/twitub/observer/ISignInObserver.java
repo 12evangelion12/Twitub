@@ -2,7 +2,12 @@ package com.ubo.tp.twitub.observer;
 
 public interface ISignInObserver {
 
-    void doLogin(String identifiant, String password);
+    default void login(String username, String password) {
+    }
 
-    void doRegister();
+    default void wrongCredentials() {
+    }
+
+    default void doRegister() {
+    }
 }

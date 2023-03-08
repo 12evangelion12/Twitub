@@ -1,18 +1,32 @@
 package com.ubo.tp.twitub.ihm.profil;
 
-public class ProfilPageView {
-/*
-    private final UserProfil userProfil;
-    private final List<User> followers;
+import com.ubo.tp.twitub.component.JFollowerList;
+import com.ubo.tp.twitub.component.JUserProfil;
+import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.IPage;
+import com.ubo.tp.twitub.model.UserProfilModel;
+import com.ubo.tp.twitub.observer.IUserObserver;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProfilPageView implements IPage.IView, IUserObserver {
+
+    private final UserProfilModel userProfilModel;
     private final List<IUserObserver> userFollowObserverList;
     private JPanel jPanel;
     private JUserProfil jUserProfil;
-    private JUserList jUserList;
+    private JFollowerList jFollowerList;
 
-    public ProfilPageView(UserProfil userProfil, List<User> followers) {
+    public ProfilPageView(UserProfilModel userProfilModel) {
         userFollowObserverList = new ArrayList<>();
-        this.followers = followers;
-        this.userProfil = userProfil;
+        this.userProfilModel = userProfilModel;
+        this.userProfilModel.addObserver(this);
     }
 
     @Override
@@ -26,47 +40,41 @@ public class ProfilPageView {
         jPanel = new JPanel();
         jPanel.setLayout(new GridBagLayout());
 
-        jUserProfil = new JUserProfil(userProfil);
+        jUserProfil = new JUserProfil(userProfilModel);
         jUserProfil.initGUI();
         GridBagConstraints jUserProfilContraint = new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(30, 0, 0, 20), 0, 0);
+
         JPanel jUserProfilPanel = (JPanel) jUserProfil.getComponent();
         jUserProfilPanel.setBorder(new LineBorder(Color.gray));
 
         jPanel.add(jUserProfilPanel, jUserProfilContraint);
-        initFollowersList(followers);
+        initFollowersList();
     }
 
     public void updateUserTwitCount(int count) {
         jUserProfil.setCount(count);
     }
 
-    public void updateListFollowers(List<User> followers) {
-        jPanel.remove(1);
-        initFollowersList(followers);
-    }
+    private void initFollowersList() {
 
-    private void initFollowersList(List<User> followers) {
-
-        jUserList = new JUserList(followers, userProfil.getUser());
-        jUserList.initGUI();
+        jFollowerList = new JFollowerList(userProfilModel.getSession(), userProfilModel.getFollowers());
+        jFollowerList.initGUI();
         GridBagConstraints jUserListContraint = new GridBagConstraints(0, 1, 1, 1, 1, 50, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(10, 0, 0, 20), 0, 0);
-        initMouseAdapter(jUserList);
+        initMouseAdapter();
 
-        jPanel.add(jUserList.getComponent(), jUserListContraint);
+        jPanel.add(jFollowerList.getComponent(), jUserListContraint);
         jPanel.revalidate();
-        jPanel.repaint(
-
-        );
+        jPanel.repaint();
     }
 
-    private void initMouseAdapter(JUserList followersList) {
-        followersList.setMouseAdapter(new MouseAdapter() {
+    private void initMouseAdapter() {
+        jFollowerList.setMouseAdapter(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (followersList.getFollowingButtonState()) {
-                    userFollowObserverList.forEach(observer -> observer.notifyUserFollow(followersList.getSelectedUser()));
+                if (jFollowerList.getFollowingButtonState()) {
+                    userFollowObserverList.forEach(observer -> observer.notifyUserFollow(jFollowerList.getSelectedUser()));
                 } else {
-                    userFollowObserverList.forEach(observer -> observer.notifyUserUnfollow(followersList.getSelectedUser()));
+                    userFollowObserverList.forEach(observer -> observer.notifyUserUnfollow(jFollowerList.getSelectedUser()));
                 }
             }
         });
@@ -74,5 +82,12 @@ public class ProfilPageView {
 
     public void addFollowUserObserver(IUserObserver observer) {
         userFollowObserverList.add(observer);
-    }*/
+    }
+
+    @Override
+    public void updateFollowerList(User session) {
+
+        jPanel.remove(1);
+        initFollowersList();
+    }
 }

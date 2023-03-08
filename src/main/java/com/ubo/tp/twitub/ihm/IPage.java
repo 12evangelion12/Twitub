@@ -1,6 +1,6 @@
 package com.ubo.tp.twitub.ihm;
 
-import com.ubo.tp.twitub.newObserver.IAccountObserver;
+import com.ubo.tp.twitub.observer.IAccountObserver;
 
 import java.awt.*;
 

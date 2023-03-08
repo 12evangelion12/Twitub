@@ -1,27 +1,29 @@
 package com.ubo.tp.twitub.model;
 
 import com.ubo.tp.twitub.datamodel.User;
-import com.ubo.tp.twitub.newObserver.IUserObserver;
+import com.ubo.tp.twitub.observer.IUserObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserProfil {
+public class UserProfilModel {
 
     private final List<IUserObserver> userProfilChangeObservers;
-    private User user;
+    private User session;
     private int TwitCount;
+    private List<User> followers;
 
-    public UserProfil() {
+    public UserProfilModel() {
         userProfilChangeObservers = new ArrayList<>();
     }
 
-    public User getUser() {
-        return user;
+    public User getSession() {
+        return session;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSession(User session) {
+        this.session = session;
+        userProfilChangeObservers.forEach(observer -> observer.updateFollowerList(session));
     }
 
     public int getTwitCount() {
@@ -31,6 +33,14 @@ public class UserProfil {
     public void setTwitCount(int twitCount) {
         TwitCount = twitCount;
         userProfilChangeObservers.forEach(observer -> observer.notifyTwitCountChanged(twitCount));
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
     }
 
     public void addObserver(IUserObserver observer) {

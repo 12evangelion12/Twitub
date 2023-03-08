@@ -5,7 +5,7 @@ import com.ubo.tp.twitub.component.JTwitSend;
 import com.ubo.tp.twitub.datamodel.User;
 import com.ubo.tp.twitub.ihm.IPage;
 import com.ubo.tp.twitub.model.TwitListModel;
-import com.ubo.tp.twitub.newObserver.ITwitObserver;
+import com.ubo.tp.twitub.observer.ITwitObserver;
 
 import javax.swing.*;
 import java.awt.*;

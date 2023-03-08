@@ -1,6 +1,6 @@
 package com.ubo.tp.twitub.component;
 
-import com.ubo.tp.twitub.newObserver.IAccountObserver;
+import com.ubo.tp.twitub.observer.IAccountObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +9,9 @@ import java.util.List;
 
 public class JSignoutConponent implements JComponent {
 
+    private final List<IAccountObserver> accountObserverList;
     private JPanel jPanel;
     private JButton signOutButton;
-    private final List<IAccountObserver> accountObserverList;
 
     public JSignoutConponent() {
         accountObserverList = new ArrayList<>();

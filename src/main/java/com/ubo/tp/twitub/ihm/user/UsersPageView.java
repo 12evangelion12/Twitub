@@ -5,7 +5,7 @@ import com.ubo.tp.twitub.component.JUserSearch;
 import com.ubo.tp.twitub.datamodel.User;
 import com.ubo.tp.twitub.ihm.IPage;
 import com.ubo.tp.twitub.model.UserListModel;
-import com.ubo.tp.twitub.newObserver.IUserObserver;
+import com.ubo.tp.twitub.observer.IUserObserver;
 
 import javax.swing.*;
 import java.awt.*;

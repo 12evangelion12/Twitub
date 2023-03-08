@@ -1,4 +1,4 @@
-package com.ubo.tp.twitub.newObserver;
+package com.ubo.tp.twitub.observer;
 
 import com.ubo.tp.twitub.datamodel.Twit;
 import com.ubo.tp.twitub.datamodel.User;

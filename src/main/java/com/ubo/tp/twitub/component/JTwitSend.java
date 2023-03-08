@@ -1,7 +1,7 @@
 package com.ubo.tp.twitub.component;
 
 import com.ubo.tp.twitub.datamodel.User;
-import com.ubo.tp.twitub.newObserver.ITwitObserver;
+import com.ubo.tp.twitub.observer.ITwitObserver;
 
 import javax.swing.*;
 import java.awt.*;

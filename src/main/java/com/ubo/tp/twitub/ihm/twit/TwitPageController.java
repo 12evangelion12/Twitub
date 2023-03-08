@@ -7,8 +7,8 @@ import com.ubo.tp.twitub.datamodel.Twit;
 import com.ubo.tp.twitub.datamodel.User;
 import com.ubo.tp.twitub.ihm.IPage;
 import com.ubo.tp.twitub.model.TwitListModel;
-import com.ubo.tp.twitub.newObserver.IAccountObserver;
-import com.ubo.tp.twitub.newObserver.ITwitObserver;
+import com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.observer.ITwitObserver;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -65,8 +65,6 @@ public class TwitPageController implements IPage.IController, IDatabaseObserver,
 
     @Override
     public void searchTwit(String twitMessage) {
-
-        System.out.println(twitMessage);
 
         List<Twit> twits = new ArrayList<>();
         if (twitMessage.isEmpty()) {

@@ -1,7 +1,7 @@
 package com.ubo.tp.twitub.ihm.signup;
 
 import com.ubo.tp.twitub.ihm.IPage;
-import com.ubo.tp.twitub.newObserver.ISignUpControllerObserver;
+import com.ubo.tp.twitub.observer.ISignUpControllerObserver;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -93,7 +93,7 @@ public class SignUpPageView implements IPage.IView, ISignUpControllerObserver {
     public void addControllerObserver(ISignUpControllerObserver observer) {
         signUpControllerObservers.add(observer);
     }
-    
+
     @Override
     public void usertagAlreadyUse() {
         JOptionPane.showMessageDialog(jPanel, "Le pseudonyme '" + pseudonyme.getText() + "' existe déjà !", "Pseudonyme déjà utilisé", JOptionPane.WARNING_MESSAGE);

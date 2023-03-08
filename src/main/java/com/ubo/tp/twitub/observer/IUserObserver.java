@@ -1,4 +1,4 @@
-package com.ubo.tp.twitub.newObserver;
+package com.ubo.tp.twitub.observer;
 
 import com.ubo.tp.twitub.datamodel.User;
 
@@ -16,5 +16,8 @@ public interface IUserObserver {
     }
 
     default void updateUserList(User session) {
+    }
+
+    default void updateFollowerList(User session) {
     }
 }

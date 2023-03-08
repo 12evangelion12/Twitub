@@ -4,7 +4,7 @@ import com.ubo.tp.twitub.core.EntityManager;
 import com.ubo.tp.twitub.datamodel.IDatabase;
 import com.ubo.tp.twitub.datamodel.User;
 import com.ubo.tp.twitub.ihm.IPage;
-import com.ubo.tp.twitub.newObserver.IAccountObserver;
+import com.ubo.tp.twitub.observer.IAccountObserver;
 import com.ubo.tp.twitub.observer.ISignInObserver;
 
 import java.awt.*;
@@ -38,7 +38,7 @@ public class SignInPageController implements IPage.IController, ISignInObserver 
     }
 
     @Override
-    public void doLogin(String identifiant, String password) {
+    public void login(String identifiant, String password) {
 
         database.getUsers().forEach(user -> {
             if (user.getName().equalsIgnoreCase(identifiant) && user.getUserPassword().equals(password)) {

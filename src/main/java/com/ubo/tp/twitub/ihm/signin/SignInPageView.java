@@ -78,7 +78,7 @@ public class SignInPageView implements IPage.IView {
     }
 
     private void initConnectionButtonEvent() {
-        signInButton.addActionListener(action -> signInObservers.forEach(ob -> ob.doLogin(userField.getText(), String.valueOf(passwordField.getPassword()))));
+        signInButton.addActionListener(action -> signInObservers.forEach(ob -> ob.login(userField.getText(), String.valueOf(passwordField.getPassword()))));
     }
 
     private void initRegisterButtonEvent() {

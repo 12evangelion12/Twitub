@@ -1,9 +1,9 @@
-package com.ubo.tp.twitub.newObserver;
+package com.ubo.tp.twitub.observer;
 
 public interface ISignUpControllerObserver {
 
     default void register(String usertag, String username, String password) {
-        
+
     }
 
     default void cancelRegister() {

@@ -6,8 +6,8 @@ import com.ubo.tp.twitub.datamodel.IDatabase;
 import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
 import com.ubo.tp.twitub.datamodel.User;
 import com.ubo.tp.twitub.ihm.IPage;
-import com.ubo.tp.twitub.newObserver.IAccountObserver;
-import com.ubo.tp.twitub.newObserver.ISignUpControllerObserver;
+import com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.observer.ISignUpControllerObserver;
 
 import java.awt.*;
 import java.util.ArrayList;

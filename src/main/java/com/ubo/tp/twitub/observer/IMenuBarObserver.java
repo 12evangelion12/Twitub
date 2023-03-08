@@ -1,4 +1,4 @@
-package com.ubo.tp.twitub.newObserver;
+package com.ubo.tp.twitub.observer;
 
 public interface IMenuBarObserver {
 

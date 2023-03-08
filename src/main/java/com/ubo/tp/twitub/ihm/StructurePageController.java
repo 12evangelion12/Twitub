@@ -5,13 +5,15 @@ import com.ubo.tp.twitub.component.JNavBarComponent;
 import com.ubo.tp.twitub.component.JSignoutConponent;
 import com.ubo.tp.twitub.core.EntityManager;
 import com.ubo.tp.twitub.datamodel.IDatabase;
+import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
 import com.ubo.tp.twitub.datamodel.User;
+import com.ubo.tp.twitub.ihm.profil.ProfilPageController;
 import com.ubo.tp.twitub.ihm.signin.SignInPageController;
 import com.ubo.tp.twitub.ihm.signup.SignUpPageController;
 import com.ubo.tp.twitub.ihm.twit.TwitPageController;
 import com.ubo.tp.twitub.ihm.user.UsersPageController;
-import com.ubo.tp.twitub.newObserver.IAccountObserver;
-import com.ubo.tp.twitub.newObserver.IMenuBarObserver;
+import com.ubo.tp.twitub.observer.IAccountObserver;
+import com.ubo.tp.twitub.observer.IMenuBarObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class StructurePageController implements IAccountObserver, IMenuBarObserver {
+public class StructurePageController implements IAccountObserver, IMenuBarObserver, IDatabaseObserver {
 
     protected StructurePageView structurePageView;
     protected IDatabase mDatabase;
@@ -28,6 +30,7 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
 
     public StructurePageController(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
+        this.mDatabase.addObserver(this);
         this.mEntityManager = entityManager;
         this.structurePageView = new StructurePageView();
         structurePageView.addObserver(this);
@@ -73,26 +76,26 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
     }
 
     @Override
-    public void notifyShowTwitPage(User user) {
-        notifyUserConnection(user);
+    public void notifyShowTwitPage() {
+        notifyUserConnection(connectedUser);
     }
 
     @Override
-    public void notifyShowFollowersPage(User user) {
+    public void notifyShowFollowersPage() {
 
-        UsersPageController usersPageController = new UsersPageController(user, mDatabase, mEntityManager);
+        UsersPageController usersPageController = new UsersPageController(connectedUser, mDatabase, mEntityManager);
         usersPageController.init();
         usersPageController.addObserver(this);
         changeView(usersPageController.show(), true);
     }
 
     @Override
-    public void notifyShowProfilPage(User user) {
-        /* TODO
-        ProfilPageController profilPageController = new ProfilPageController(user, mDatabase, mEntityManager);
+    public void notifyShowProfilPage() {
+
+        ProfilPageController profilPageController = new ProfilPageController(connectedUser, mDatabase, mEntityManager);
         profilPageController.init();
         profilPageController.addObserver(this);
-        changeView(profilPageController.show(), true);*/
+        changeView(profilPageController.show(), true);
     }
 
     private void initNavBarListener(JNavBarComponent navBarComponent) {
@@ -101,7 +104,7 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                notifyShowProfilPage(connectedUser);
+                notifyShowProfilPage();
             }
         });
 
@@ -109,7 +112,7 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                notifyShowTwitPage(connectedUser);
+                notifyShowTwitPage();
             }
         });
 
@@ -117,7 +120,7 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                notifyShowFollowersPage(connectedUser);
+                notifyShowFollowersPage();
             }
         });
     }
@@ -155,5 +158,12 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
     @Override
     public void notifyCloseButtonClicked() {
         System.exit(0);
+    }
+
+    @Override
+    public void notifyUserModified(User modifiedUser) {
+        if (modifiedUser.getUserTag().equalsIgnoreCase(this.connectedUser.getUserTag())) {
+            this.connectedUser = modifiedUser;
+        }
     }
 }

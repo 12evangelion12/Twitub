@@ -75,6 +75,7 @@ public class JUser implements JComponent {
     }
 
     public boolean followButtonState() {
+        System.out.println(followed.isSelected());
         return followed.isSelected();
     }
 

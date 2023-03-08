@@ -10,18 +10,19 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class JUserList implements JComponent {
+public class JFollowerList implements JComponent {
 
     private final User session;
-    private final List<User> users;
+    private final List<User> followers;
     private JScrollPane jScrollPane;
     private User selectedUser;
+
     private boolean followingButtonState;
     private MouseAdapter mouseAdapter;
 
-    public JUserList(User session, List<User> users) {
+    public JFollowerList(User session, List<User> followers) {
         this.session = session;
-        this.users = users;
+        this.followers = followers;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class JUserList implements JComponent {
         JPanel jPanel = new JPanel(new GridBagLayout());
         AtomicInteger yPos = new AtomicInteger(0);
 
-        users.forEach(user -> {
+        followers.forEach(user -> {
 
             JUser jUser = new JUser(user, session.getFollows().contains(user.getUserTag()));
             jUser.initGUI();
@@ -48,16 +49,17 @@ public class JUserList implements JComponent {
             yPos.getAndIncrement();
             jPanel.add(jUser.getComponent(), jUserContraint);
         });
+
         jScrollPane = new JScrollPane(jPanel);
         jScrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
     }
 
-    public User getSelectedUser() {
-        return selectedUser;
-    }
-
     public boolean getFollowingButtonState() {
         return followingButtonState;
+    }
+
+    public User getSelectedUser() {
+        return selectedUser;
     }
 
     public void setMouseAdapter(MouseAdapter mouseAdapter) {
@@ -68,6 +70,4 @@ public class JUserList implements JComponent {
     public Component getComponent() {
         return jScrollPane;
     }
-
-
 }

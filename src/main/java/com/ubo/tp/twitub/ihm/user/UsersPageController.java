@@ -6,7 +6,7 @@ import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
 import com.ubo.tp.twitub.datamodel.User;
 import com.ubo.tp.twitub.ihm.IPage;
 import com.ubo.tp.twitub.model.UserListModel;
-import com.ubo.tp.twitub.newObserver.IUserObserver;
+import com.ubo.tp.twitub.observer.IUserObserver;
 
 import java.awt.*;
 import java.util.List;

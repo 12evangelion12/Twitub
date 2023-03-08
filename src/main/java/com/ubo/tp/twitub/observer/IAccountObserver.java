@@ -1,4 +1,4 @@
-package com.ubo.tp.twitub.newObserver;
+package com.ubo.tp.twitub.observer;
 
 import com.ubo.tp.twitub.datamodel.User;
 
@@ -10,9 +10,9 @@ public interface IAccountObserver {
 
     void notifyUserInscription();
 
-    void notifyShowTwitPage(User user);
+    void notifyShowTwitPage();
 
-    void notifyShowFollowersPage(User user);
+    void notifyShowFollowersPage();
 
-    void notifyShowProfilPage(User user);
+    void notifyShowProfilPage();
 }
