@@ -13,6 +13,7 @@ public class JTwitSend implements JComponent, ITwitObserver {
     private final User session;
     private JPanel jPanel;
     private JButton twitSendButton;
+    private JButton twitSearchButton;
     private JTextArea twitTextArea;
     private String twitMessage;
     private JLabel twitStateLabel;
@@ -41,11 +42,16 @@ public class JTwitSend implements JComponent, ITwitObserver {
         GridBagConstraints twitSendConstraints = new GridBagConstraints(2, 4, 1, 1, 1, 1,
                 GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
 
+        twitSearchButton = new JButton("Rechercher le twit");
+        GridBagConstraints twitSearchButtonConstraints = new GridBagConstraints(1, 4, 1, 1, 1, 1,
+                GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+
         twitStateLabel = new JLabel();
         GridBagConstraints twitStateLabelConstraints = new GridBagConstraints(0, 3, 3, 1, 1, 0,
                 GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0);
 
         jPanel.add(twitSendButton, twitSendConstraints);
+        jPanel.add(twitSearchButton, twitSearchButtonConstraints);
         jPanel.add(scrollPane, scrollPaneAreaConstraints);
         jPanel.add(twitSenderLabel, twitSenderLabelConstraints);
         jPanel.add(twitStateLabel, twitStateLabelConstraints);
@@ -54,6 +60,16 @@ public class JTwitSend implements JComponent, ITwitObserver {
 
     public void initTwitButtonEvent(MouseAdapter mouseAdapter) {
         twitSendButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                twitMessage = twitTextArea.getText();
+                mouseAdapter.mouseClicked(e);
+            }
+        });
+    }
+
+    public void initTwitSearchButtonEvent(MouseAdapter mouseAdapter) {
+        twitSearchButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 twitMessage = twitTextArea.getText();

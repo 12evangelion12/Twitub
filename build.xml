@@ -6,7 +6,7 @@
     <property name="sonar.host.url" value="http://localhost:9000"/>
     <property name="sonar.projectKey" value="Twittub"/>
 
-    <property name="sonar.login" value="sqp_93318f8ef5c143e7bf3616caf6f5455375505bae"/>
+    <property name="sonar.login" value="sqp_30c6c6946199d01865c6e4b1be09dc684a37e6f6"/>
     <property name="sonar.projectName" value="Twittub"/>
     <property name="sonar.projectVersion" value="1.0"/>
     <property name="sonar.sources" value="src"/>

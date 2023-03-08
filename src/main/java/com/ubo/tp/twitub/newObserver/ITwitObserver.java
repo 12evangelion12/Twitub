@@ -10,6 +10,9 @@ public interface ITwitObserver {
     default void sendTwit(User user, String twitMessage) {
     }
 
+    default void searchTwit(String twitMessage) {
+    }
+
     default void notifyTwitListChanged(List<Twit> twits) {
     }
 

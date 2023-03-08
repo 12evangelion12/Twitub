@@ -32,8 +32,9 @@ public class JUser implements JComponent {
         JLabel userProfil = new JLabel();
         ImageIcon icon = null;
         try {
-            icon = new ImageIcon(ImageIO.read(new File(user.getAvatarPath())));
-        } catch (IOException e) {
+            File file = new File(user.getAvatarPath());
+            icon = new ImageIcon(ImageIO.read(file));
+        } catch (Exception e) {
             System.out.println("Impossible de charger l'icone de l'utilisateur, chargement de l'icone par défaut en cours...");
             try {
                 icon = new ImageIcon(ImageIO.read(new File(Constants.DEFAULT_USER_ICON_PATH)));

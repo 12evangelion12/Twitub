@@ -42,6 +42,7 @@ public class TwitPageView implements IPage.IView {
         twitObservers.add(jTwitSend);
         GridBagConstraints jTwitSendContraint = new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(20, 0, 0, 20), 0, 0);
         initSendTwitButton();
+        initSearchTwitButton();
 
         jTwitList = new JTwitList(twits);
         jTwitList.initGUI();
@@ -77,6 +78,19 @@ public class TwitPageView implements IPage.IView {
 
                 twitObservers.forEach(ITwitObserver::notifyTwitAccepted);
                 twitControllerObservers.forEach(iTwitObserver -> iTwitObserver.sendTwit(session, twitMessage));
+            }
+        });
+    }
+
+    private void initSearchTwitButton() {
+
+        jTwitSend.initTwitSearchButtonEvent(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                String twitMessage = jTwitSend.getTwitMessage();
+                twitControllerObservers.forEach(iTwitObserver -> iTwitObserver.searchTwit(twitMessage));
             }
         });
     }
