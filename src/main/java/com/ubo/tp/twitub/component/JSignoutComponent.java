@@ -7,13 +7,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSignoutConponent implements JComponent {
+public class JSignoutComponent implements JComponent {
 
     private final List<IAccountObserver> accountObserverList;
     private JPanel jPanel;
     private JButton signOutButton;
 
-    public JSignoutConponent() {
+    public JSignoutComponent() {
         accountObserverList = new ArrayList<>();
     }
 
@@ -23,7 +23,7 @@ public class JSignoutConponent implements JComponent {
         jPanel = new JPanel(new GridBagLayout());
 
         signOutButton = new JButton("Se déconnecter");
-        GridBagConstraints signOutButtonContraint = new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(10, 0, 0, 20), 0, 0);
+        GridBagConstraints signOutButtonContraint = new GridBagConstraints(1, 0, 1, 1, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(10, 0, 0, 20), 0, 0);
         initSignOutListener();
 
         jPanel.add(signOutButton, signOutButtonContraint);

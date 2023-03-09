@@ -24,4 +24,7 @@ public interface ITwitObserver {
 
     default void notifyTwitAccepted() {
     }
+
+    default void notifyTwitAdded() {
+    }
 }

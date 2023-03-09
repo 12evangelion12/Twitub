@@ -2,7 +2,7 @@ package com.ubo.tp.twitub.ihm;
 
 import com.ubo.tp.twitub.common.SharedDirectoryManager;
 import com.ubo.tp.twitub.component.JNavBarComponent;
-import com.ubo.tp.twitub.component.JSignoutConponent;
+import com.ubo.tp.twitub.component.JSignoutComponent;
 import com.ubo.tp.twitub.core.EntityManager;
 import com.ubo.tp.twitub.datamodel.IDatabase;
 import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
@@ -134,10 +134,10 @@ public class StructurePageController implements IAccountObserver, IMenuBarObserv
             initNavBarListener(navBarComponent);
             structurePageView.mFrame.getContentPane().add(navBarComponent.getComponent(), BorderLayout.WEST);
 
-            JSignoutConponent jSignoutConponent = new JSignoutConponent();
-            jSignoutConponent.initGUI();
-            jSignoutConponent.addObserver(this);
-            structurePageView.mFrame.getContentPane().add(jSignoutConponent.getComponent(), BorderLayout.NORTH);
+            JSignoutComponent jSignoutComponent = new JSignoutComponent();
+            jSignoutComponent.initGUI();
+            jSignoutComponent.addObserver(this);
+            structurePageView.mFrame.getContentPane().add(jSignoutComponent.getComponent(), BorderLayout.NORTH);
         }
 
         structurePageView.mFrame.getContentPane().add(jPanel, BorderLayout.CENTER);

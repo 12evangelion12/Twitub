@@ -1,5 +1,6 @@
 package com.ubo.tp.twitub.common;
 
+import com.ubo.tp.twitub.TwitubLauncher;
 import com.ubo.tp.twitub.core.EntityManager;
 import com.ubo.tp.twitub.datamodel.IDatabase;
 import com.ubo.tp.twitub.events.file.IWatchableDirectory;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.logging.Level;
 
 public class SharedDirectoryManager {
 
@@ -64,7 +66,7 @@ public class SharedDirectoryManager {
                     properties.setProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY, String.valueOf(jFileChooser.getSelectedFile().getAbsoluteFile()));
                     PropertiesManager.writeProperties(properties, Constants.CONFIGURATION_FILE);
                     initDirectory(jFileChooser.getSelectedFile().getAbsolutePath());
-                    System.out.println("\nLe dossier partagé à été défini sur le dossier : " + jFileChooser.getSelectedFile().getAbsoluteFile());
+                    TwitubLauncher.getLogger(getClass()).log(Level.INFO, "\nLe dossier partagé à été défini sur le dossier : {}", jFileChooser.getSelectedFile().getAbsoluteFile());
                 } else {
                     JOptionPane.showMessageDialog(jFileChooser, "Le dossier selectionné n'est pas valide !", "Répertoire d'échange invalide !", JOptionPane.WARNING_MESSAGE);
                     openFileChooser();

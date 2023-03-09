@@ -1,8 +1,11 @@
 package com.ubo.tp.twitub.observer;
 
+import com.ubo.tp.twitub.TwitubLauncher;
 import com.ubo.tp.twitub.datamodel.IDatabaseObserver;
 import com.ubo.tp.twitub.datamodel.Twit;
 import com.ubo.tp.twitub.datamodel.User;
+
+import java.util.logging.Level;
 
 
 public class DataBaseObserverImpl implements IDatabaseObserver {
@@ -10,42 +13,42 @@ public class DataBaseObserverImpl implements IDatabaseObserver {
     @Override
     public void notifyTwitAdded(Twit addedTwit) {
 
-        System.out.println("\nUn twit à été ajouté par : " + addedTwit.getTwiter().getName());
-        System.out.println("contenu du nouveau twit : \"" + addedTwit.getText() + "\"");
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Un twit à été ajouté par : {0}", addedTwit.getTwiter().getName());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "contenu du nouveau twit : \"{0}\"\n", addedTwit.getText());
     }
 
     @Override
     public void notifyTwitDeleted(Twit deletedTwit) {
 
-        System.out.println("\nUn twit à été supprimé par : " + deletedTwit.getTwiter().getName());
-        System.out.println("contenu du twit supprimé : \"" + deletedTwit.getText() + "\"");
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Un twit à été supprimé par : {0}", deletedTwit.getTwiter().getName());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "contenu du twit supprimé : \"{0}\"\n", deletedTwit.getText());
     }
 
     @Override
     public void notifyTwitModified(Twit modifiedTwit) {
 
-        System.out.println("\nUn twit à été modifié par :" + modifiedTwit.getTwiter().getName());
-        System.out.println("contenu du twit modifié : \"" + modifiedTwit.getText() + "\"");
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Un twit à été modifié par : {0}", modifiedTwit.getTwiter().getName());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "contenu du twit modifié : \"{0}\"\n", modifiedTwit.getText());
     }
 
     @Override
     public void notifyUserAdded(User addedUser) {
 
-        System.out.println("\nUn utilisateur à été ajouté !");
-        System.out.println("UserTag: " + addedUser.getUserTag());
-        System.out.println("UserUUID: " + addedUser.getUuid());
-        System.out.println("UserName: " + addedUser.getName());
-        System.out.println("Password: " + addedUser.getUserPassword());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Un utilisateur à été ajouté !");
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "UserTag: {0}", addedUser.getUserTag());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "UserUUID: {0}", addedUser.getUuid());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "UserName: {0}", addedUser.getName());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Password: {0}\n", addedUser.getUserPassword());
     }
 
     @Override
     public void notifyUserDeleted(User deletedUser) {
 
-        System.out.println("L'utilisateur \"" + deletedUser.getName() + "\" a été supprimé !");
+        TwitubLauncher.getLogger(getClass()).log(Level.FINE, "L'utilisateur \"{0}\" a été supprimé !\n", deletedUser.getName());
     }
 
     @Override
     public void notifyUserModified(User modifiedUser) {
-        System.out.println("L'utilisateur \"" + modifiedUser.getName() + "\" a été modifié !");
+        TwitubLauncher.getLogger(getClass()).log(Level.FINE, "L'utilisateur \"{0}\" a été modifié !\n", modifiedUser.getName());
     }
 }

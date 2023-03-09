@@ -1,5 +1,6 @@
 package com.ubo.tp.twitub.component;
 
+import com.ubo.tp.twitub.TwitubLauncher;
 import com.ubo.tp.twitub.common.Constants;
 import com.ubo.tp.twitub.datamodel.User;
 
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class JUser implements JComponent {
 
@@ -35,12 +37,12 @@ public class JUser implements JComponent {
             File file = new File(user.getAvatarPath());
             icon = new ImageIcon(ImageIO.read(file));
         } catch (Exception e) {
-            System.out.println("Impossible de charger l'icone de l'utilisateur, chargement de l'icone par défaut en cours...");
+            TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Impossible de charger l'icone de l'utilisateur, chargement de l'icone par défaut en cours...");
             try {
                 icon = new ImageIcon(ImageIO.read(new File(Constants.DEFAULT_USER_ICON_PATH)));
-                System.out.println("Chargement de l'icone par défaut réussi !");
+                TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Chargement de l'icone par défaut réussi !");
             } catch (IOException ex) {
-                System.out.println("Impossible de charger l'icone par défaut");
+                TwitubLauncher.getLogger(getClass()).log(Level.INFO, "Impossible de charger l'icone par défaut");
             }
         }
         if (icon != null) {
@@ -75,7 +77,7 @@ public class JUser implements JComponent {
     }
 
     public boolean followButtonState() {
-        System.out.println(followed.isSelected());
+        TwitubLauncher.getLogger(getClass()).log(Level.INFO, "{}", followed.isSelected());
         return followed.isSelected();
     }
 

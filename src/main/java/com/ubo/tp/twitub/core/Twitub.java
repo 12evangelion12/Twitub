@@ -1,5 +1,6 @@
 package com.ubo.tp.twitub.core;
 
+import com.ubo.tp.twitub.TwitubLauncher;
 import com.ubo.tp.twitub.common.Constants;
 import com.ubo.tp.twitub.common.PropertiesManager;
 import com.ubo.tp.twitub.common.SharedDirectoryManager;
@@ -10,6 +11,7 @@ import com.ubo.tp.twitub.ihm.TwitubMock;
 import com.ubo.tp.twitub.observer.DataBaseObserverImpl;
 
 import javax.swing.*;
+import java.util.logging.Level;
 
 /**
  * Classe principale l'application.
@@ -65,7 +67,7 @@ public class Twitub {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                 UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+            TwitubLauncher.getLogger(getClass()).log(Level.SEVERE, "Impossible de définir le 'LookAndFeel' de l'application", e);
         }
     }
 

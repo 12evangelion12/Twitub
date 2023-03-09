@@ -1,5 +1,6 @@
 package com.ubo.tp.twitub.ihm;
 
+import com.ubo.tp.twitub.TwitubLauncher;
 import com.ubo.tp.twitub.observer.IMenuBarObserver;
 
 import javax.imageio.ImageIO;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class StructurePageView implements IPage.IView {
 
@@ -40,8 +42,6 @@ public class StructurePageView implements IPage.IView {
 
             // Affichage
             StructurePageView.this.mFrame.setVisible(true);
-
-            //TwitubMainView.this.mFrame.pack();
         });
 
         return null;
@@ -60,7 +60,7 @@ public class StructurePageView implements IPage.IView {
         try {
             mFrame.setIconImage(ImageIO.read(new File("src/main/resources/images/applicationIcon.png")));
         } catch (IOException e) {
-            e.printStackTrace();
+            TwitubLauncher.getLogger(getClass()).log(Level.SEVERE, "Impossible de récupérer l'icone de l'application", e);
         }
 
         //Ajout d'un menuBar
@@ -74,7 +74,7 @@ public class StructurePageView implements IPage.IView {
             initCloseButtonListener();
             files.add(closeMenu);
         } catch (IOException e) {
-            e.printStackTrace();
+            TwitubLauncher.getLogger(getClass()).log(Level.SEVERE, "Impossible de récupérer l'icone de fermeture de l'application du menu", e);
         }
 
         //Création d'un sous menu dossier partage pour le menu "Fichier"
@@ -85,7 +85,7 @@ public class StructurePageView implements IPage.IView {
             initFolderButtonListener();
             files.add(partagedFolderMenu);
         } catch (IOException e) {
-            e.printStackTrace();
+            TwitubLauncher.getLogger(getClass()).log(Level.SEVERE, "Impossible de récupérer l'icone du dossier de partage du menu", e);
         }
 
         //Création du bouton permettant d'afficher le dialog "help"

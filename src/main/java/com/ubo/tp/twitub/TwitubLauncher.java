@@ -2,6 +2,8 @@ package com.ubo.tp.twitub;
 
 import com.ubo.tp.twitub.core.Twitub;
 
+import java.util.logging.Logger;
+
 /**
  * Classe de lancement de l'application.
  *
@@ -19,4 +21,7 @@ public class TwitubLauncher {
         twitub.show();
     }
 
+    public static Logger getLogger(Class<?> clzz) {
+        return Logger.getGlobal();
+    }
 }

@@ -1,10 +1,13 @@
 package com.ubo.tp.twitub.common;
 
+import com.ubo.tp.twitub.TwitubLauncher;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  * Classe utilitaire de gestion du chargement et de la sauvegarde des
@@ -26,15 +29,14 @@ public class PropertiesManager {
             try {
                 in = new FileInputStream(configurationFilePath);
                 properties.load(in);
-            } catch (Throwable t) {
-                System.out.println("Impossible de charger les configurations");
-                t.printStackTrace();
+            } catch (Exception e) {
+                TwitubLauncher.getLogger(PropertiesManager.class).log(Level.INFO, "Impossible de charger les configurations", e);
             } finally {
                 if (in != null) {
                     try {
                         in.close();
                     } catch (IOException e) {
-                        System.err.println("Erreur lors de la fermeture du flux sur le fichier de configuration");
+                        TwitubLauncher.getLogger(PropertiesManager.class).log(Level.SEVERE, "Erreur lors de la fermeture du flux sur le fichier de configuration", e);
                     }
                 }
             }
@@ -55,15 +57,14 @@ public class PropertiesManager {
             try {
                 out = new FileOutputStream(configurationFilePath);
                 properties.store(out, "Configuration de l'application TwitUb");
-            } catch (Throwable t) {
-                System.err.println("Impossible d'enregistrer les configurations");
-                t.printStackTrace();
+            } catch (Exception e) {
+                TwitubLauncher.getLogger(PropertiesManager.class).log(Level.SEVERE, "Impossible d'enregistrer les configurations", e);
             } finally {
                 if (out != null) {
                     try {
                         out.close();
-                    } catch (Throwable e) {
-                        System.err.println("Erreur lors de la fermeture du flux sur le fichier de configuration");
+                    } catch (Exception e) {
+                        TwitubLauncher.getLogger(PropertiesManager.class).log(Level.SEVERE, "Erreur lors de la fermeture du flux sur le fichier de configuration", e);
                     }
                 }
             }
