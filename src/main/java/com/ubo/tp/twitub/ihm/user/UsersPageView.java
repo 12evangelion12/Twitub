@@ -27,6 +27,7 @@ public class UsersPageView implements IPage.IView, IUserObserver {
         this.userListModel = userListModel;
         this.userListModel.addObserver(this);
         userObservers = new ArrayList<>();
+        userObservers.add(this);
     }
 
     @Override
@@ -61,12 +62,14 @@ public class UsersPageView implements IPage.IView, IUserObserver {
 
     private void showUsers() {
 
-        List<User> tempList = new ArrayList<>(userListModel.getUsers());
-        if (jUserSearch.getSearchingText() != null && !jUserSearch.getSearchingText().isEmpty()) {
-            userListModel.setUsers(parseUsers(tempList, jUserSearch.getSearchingText()));
+        List<User> tempList = new ArrayList<>();
+        if (jUserSearch.getSearchingText() != null && jUserSearch.getSearchingText().isEmpty()) {
+            tempList.addAll(userListModel.getUsers());
+        } else {
+            tempList.addAll(parseUsers(userListModel.getUsers(), jUserSearch.getSearchingText()));
         }
 
-        jUserList = new JUserList(userListModel.getSession(), userListModel.getUsers());
+        jUserList = new JUserList(userListModel.getSession(), tempList);
         initUserListMouseAdapter();
         jUserList.initGUI();
         GridBagConstraints userListContraint = new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(20, 0, 0, 20), 0, 0);
